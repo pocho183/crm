@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+def environment = hasProperty('env') ? env : 'local'
+
+repositories {
+	mavenCentral()
+	flatDir {
+		dirs 'lib'
+	}
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDir "etc/$environment"
+		}
+	}
+}
+
+eclipse {
+	project {
+		name 'crm'
+	}
+}
+
+dependencies {
+	runtimeOnly fileTree('libs') { include '*.jar' }
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'	
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.5.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.5.1'
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.8'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.4'
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.4'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
+	implementation group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.jpa', version: '2.7.8'
+	compile group: 'io.github.classgraph', name: 'classgraph', version: '4.4.12'
+	compile group: 'ma.glasnost.orika', name: 'orika-core', version: '1.5.2'
+}
