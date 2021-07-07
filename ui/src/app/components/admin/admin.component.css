@@ -1,0 +1,8 @@
+.admin {
+	display: flex;
+	flex-direction: column;
+}
+
+.btn-top {
+	padding-left:5px;
+}

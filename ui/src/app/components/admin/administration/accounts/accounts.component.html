@@ -1,0 +1,99 @@
+<div>
+	<p-toolbar styleClass="p-mb-4">
+		<ng-template pTemplate="left"></ng-template>
+        <ng-template pTemplate="right">
+            <button (click)="createAccount()" pButton pRipple label="Crea nuovo Account" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+        </ng-template>
+    </p-toolbar>
+	<p-table [value]="accounts" [paginator]="true" [rows]="5" dataKey="id" editMode="row">
+	    <ng-template pTemplate="header">
+	        <tr class="data-field">
+	            <th style="width:5.5em">Nome</th>
+	            <th style="width:5.5em">Cognome</th>
+	            <th style="width:5.5em">Email</th>
+	            <th style="width:5.5em">Password</th>
+	            <th style="width:5.5em">Telefono</th>
+	            <th style="width:5.5em">Stato</th>
+	            <th style="width:5.5em">Cliente</th>
+	            <th style="width:5.5em">Ruolo</th>
+	            <th style="width:5.5em">Opzioni</th>
+	        </tr>
+	    </ng-template>
+	    <ng-template pTemplate="emptymessage">
+			<tr><td class="data-field" [attr.colspan]="9">Non ci sono dati</td></tr>
+		</ng-template>
+	    <ng-template pTemplate="body" let-account let-editing="editing" let-ri="rowIndex">
+	        <tr [pEditableRow]="account">
+	            <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="account.name" [style]="{'width':'100%', 'height':'2vw'}" class="in-account">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.name}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="account.surname" [style]="{'width':'100%', 'height':'2vw'}" class="in-account p-inputtext-lg">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.surname}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="account.email" [style]="{'width':'100%', 'height':'2vw'}" class="in-account">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.email}}</ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                             <input pInputText type="text" [(ngModel)]="account.password" [style]="{'width':'100%', 'height':'2vw'}" class="in-account">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.password}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="account.phone" [style]="{'width':'100%', 'height':'2vw'}" class="in-account">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.phone}}</ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                        	<p-dropdown [options]="statuses" [(ngModel)]="account.status" [style]="{'width':'100%'}" [showClear]="true" placeholder="Seleziona"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.status}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="companies" [(ngModel)]="account.company" [style]="{'width':'100%'}" [showClear]="true" placeholder="Seleziona"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.company}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                        	<p-dropdown [options]="roles" [(ngModel)]="account.role" [style]="{'width':'100%'}" [showClear]="true" placeholder="Seleziona"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">{{account.role}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td style="text-align:left">
+                    <button  (click)="onRowEditInit(account)" *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                    <button  (click)="onRowEditSave(account)" *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button  (click)="onRowEditCancel(account, ri)" *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+	        </tr>
+	    </ng-template>
+	</p-table>
+</div>

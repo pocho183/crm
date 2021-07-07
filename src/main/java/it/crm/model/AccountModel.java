@@ -1,21 +1,19 @@
-package it.crm.domain;
+package it.crm.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 
+import it.crm.domain.Company;
 import it.crm.enumerator.RoleTypes;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-public class Account extends BaseEntity implements Serializable {
+public class AccountModel {
 
-	private static final long serialVersionUID = 7438544473254925603L;	
-	
 	private String name;
 	private String surname;
 	private String email;
@@ -23,6 +21,7 @@ public class Account extends BaseEntity implements Serializable {
 	private String phone;
 	private String label;
 	private String status;
+	@OneToOne(cascade = CascadeType.ALL)
 	private Company company;
 	private RoleTypes role;
 	private Date lastConnection;

@@ -1,5 +1,4 @@
 <div class="wrapper">
-	<p-button type="text" (click)="display = true" icon="pi pi-plus" label="Show"></p-button>
-	<p-sidebar [(visible)]="display">Content</p-sidebar>
-	<router-outlet></router-outlet>
+	<admin ></admin>
+	<manager *ngIf="false"></manager>
 </div>

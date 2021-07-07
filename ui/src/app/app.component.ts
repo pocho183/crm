@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AdminComponent } from './components/admin/admin.component';
+import { ManagerComponent } from './components/manager/manager.component';
 
 @Component({
 	selector: 'app-root',
@@ -6,6 +8,5 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	display: boolean = false;
 	
 }
