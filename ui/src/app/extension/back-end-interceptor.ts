@@ -12,9 +12,8 @@ export class BackEndInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if(req.url && (!req.url.startsWith('http') && !req.url.startsWith('/assets'))) {
-      console.log(this.window.location.port);
       const port = environment.needPort ? environment.backEndPort : this.window.location.port;
-      req = req.clone( {
+      req = req.clone({
         url: this.window.location.protocol + '//' + this.window.location.hostname + ':' + port + environment.backEnd + req.url
       });
     }

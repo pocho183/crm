@@ -16,4 +16,14 @@ export class AccountService {
     return this.http.post<Account>(url, account).pipe(first(), map(res => {return plainToClass(Account, res)}));
   }
 
+  loadAccounts(): Observable<Account[]> {
+	const url = "/account/load";
+    return this.http.get<Account[]>(url).pipe(first(), map(res => {return plainToClass(Account, res)}));
+  }
+
+  deleteAccount(account: Account) {
+	const url = "/account/delete";
+    return this.http.post<Account>(url, account).pipe(first(), map(res => {return plainToClass(Account, res)}));
+  }
+
 }

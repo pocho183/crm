@@ -4,7 +4,7 @@ import { Company } from 'src/app/models/company';
 import { MenuItem } from 'primeng/api';
 
 import { AccountsComponent } from './accounts/accounts.component';
-import { ClientsComponent } from './clients/clients.component';
+import { CompanyComponent } from './company/company.component';
 
 @Component({
 	selector: 'administration',
@@ -25,8 +25,8 @@ export class AdministrationComponent implements OnInit {
 
     ngOnInit() {
         this.items = [
-            {label: 'Gestione Utenti', tabindex: '0', icon: 'pi pi-fw pi-home',  command: (event) => { this.changeTab(event); } },
-            {label: 'Gestione Clienti', tabindex: '1', icon: 'pi pi-fw pi-calendar', command: (event) => { this.changeTab(event); }}
+			{label: 'Gestione Società', tabindex: '0', icon: 'pi pi-fw pi-th-large', command: (event) => { this.changeTab(event); }},
+            {label: 'Gestione Utenti', tabindex: '1', icon: 'pi pi-fw pi-user',  command: (event) => { this.changeTab(event); } }
         ];
 		this.activeItem = this.items[0];
     }

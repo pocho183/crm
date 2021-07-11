@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.servlet.annotation.ServletSecurity.EmptyRoleSemantic;
 
 import it.crm.enumerator.RoleTypes;
+import it.crm.enumerator.StatusType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,8 +27,16 @@ public class Account extends BaseEntity implements Serializable {
 	private String password;
 	private String phone;
 	private String label;
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private StatusType status;
+	@ManyToOne
 	private Company company;
+	@Enumerated(EnumType.STRING)
 	private RoleTypes role;
 	private Date lastConnection;
+	
+	@Override
+	protected void softRemove(Date deleted) {
+		// TODO Auto-generated method stub
+	}
 }

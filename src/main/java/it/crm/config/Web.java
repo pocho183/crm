@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -14,7 +14,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -25,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Configuration
 @EnableWebMvc
 @PropertySource(value = {"classpath:application.properties"})
+@ComponentScan(basePackages= { "it.crm.controller", "it.crm.config" }) 
 public class Web implements WebMvcConfigurer {
 
 	@Autowired
@@ -45,20 +45,20 @@ public class Web implements WebMvcConfigurer {
 		WebMvcConfigurer.super.extendMessageConverters(converters);
 	}
 
-//	@Override
-//	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-//		configurer.defaultContentType(MediaType.APPLICATION_JSON).favorPathExtension(true).ignoreAcceptHeader(true).useRegisteredExtensionsOnly(true).mediaType(MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_XML).mediaType(MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON);
-//		WebMvcConfigurer.super.configureContentNegotiation(configurer);
-//	}
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		configurer.defaultContentType(MediaType.APPLICATION_JSON).favorPathExtension(true).ignoreAcceptHeader(true).useRegisteredExtensionsOnly(true).mediaType(MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_XML).mediaType(MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON);
+		WebMvcConfigurer.super.configureContentNegotiation(configurer);
+	}
 
-//	@Override
-//	public void addCorsMappings(CorsRegistry registry) {
-//		registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins(env.getProperty("origins.allowed").split(","));
-//	}
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins(env.getProperty("origins.allowed").split(","));
+	}
 	
-//	@Override
-//	public void addCorsMappings(CorsRegistry registry) {
-//		registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowedOrigins(env.getProperty("origins.allowed"));
-//	}
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(new PageableHandlerMethodArgumentResolver());
+	}
 	
 }

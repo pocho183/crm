@@ -9,6 +9,9 @@ repositories {
 	}
 }
 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 sourceSets {
 	main {
 		resources {
@@ -27,10 +30,9 @@ dependencies {
 	runtimeOnly fileTree('libs') { include '*.jar' }
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'	
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.1'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.5.1'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.5.1'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.1'
-    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.8'
+    //implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.1'
+    //implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.8'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.4'
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.4'
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'

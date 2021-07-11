@@ -31,10 +31,10 @@
 	<logger name="it.crm" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT"/>
 	</logger>
-	<logger name="ma.glasnost.orika" level="DEBUG" additivity="false">
+	<logger name="ma.glasnost.orika" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="org.eclipse.persistence" level="DEBUG" additivity="false">
+	<logger name="org.eclipse.persistence" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	<logger name="org.springframework" level="INFO" additivity="false">

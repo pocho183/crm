@@ -9,13 +9,11 @@ import { AdminModule } from './components/admin/admin.module';
 import { ManagerModule } from './components/manager/manager.module';
 
 import { AccountService } from 'src/app/services/account.service';
-import { MessageService } from 'primeng/api';
+import { CompanyService } from 'src/app/services/company.service';
 
 import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component'
@@ -34,15 +32,13 @@ import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.co
 	ToolbarModule,
 	ButtonModule,
 	FormsModule,
-	ReactiveFormsModule,
-	MessagesModule,
-	MessageModule
+	ReactiveFormsModule
   ],
   providers: [
 	WINDOW_PROVIDERS,
     { provide: HTTP_INTERCEPTORS, useClass: BackEndInterceptor, multi: true },
 	AccountService,
-	MessageService
+	CompanyService
   ],
   bootstrap: [AppComponent]
 })
