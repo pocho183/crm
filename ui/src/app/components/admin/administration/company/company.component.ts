@@ -43,7 +43,7 @@ export class CompanyComponent implements OnInit {
         if (company.name != null && company.name != "") {
 			this.companyService.saveCompany(company).subscribe(response => {
 				this.loadCompanies();
-			});
+			}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'La società NON è stata salvata', closable: false, life: 2000}); });
         }  
         else {
             this.messageService.add({severity:'error', summary: 'Errore', detail:'Società non valida', closable: false, life: 2000});
@@ -58,9 +58,12 @@ export class CompanyComponent implements OnInit {
 			acceptLabel: "No",
 			rejectLabel: "Si",
 			reject: () => {
-				this.companyService.deleteCompany(company).subscribe(response => {
-					this.loadCompanies();
-				});
+				if(company.name) {
+					this.companyService.deleteCompany(company).subscribe(response => {
+						this.loadCompanies();
+					}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'Cliente NON trovato !', closable: false, life: 2000}); });
+				}
+				else this.loadCompanies();
 			}
 		});
 	}

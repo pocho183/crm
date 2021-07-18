@@ -49,14 +49,10 @@ export class AccountsComponent implements OnInit {
 	}
 
 	onRowEditSave(account: Account) {
-		
-		console.log(account);
-		
-		
         if (account.password != null && account.email != null && account.password != "" && account.email != "") {
 			this.accountService.saveAccount(account).subscribe(response => {
 				this.loadAccounts();
-			});
+			}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'L\'utente è NON è stato salvata', closable: false, life: 2000}); });
         }  
         else {
             this.messageService.add({severity:'error', summary: 'Errore', detail:'Account non valido', closable: false, life: 2000});
@@ -71,9 +67,12 @@ export class AccountsComponent implements OnInit {
 			acceptLabel: "No",
 			rejectLabel: "Si",
 			reject: () => {
-				this.accountService.deleteAccount(account).subscribe(response => {
-					this.loadAccounts();
-				});
+				if(account.email && account.password) {
+					this.accountService.deleteAccount(account).subscribe(response => {
+						this.loadAccounts();
+					}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'Utente NON trovato !', closable: false, life: 2000}); });
+				}
+				else this.loadAccounts();
 			}
 		});
 	}
