@@ -51,6 +51,6 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.4'
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
 	implementation group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.jpa', version: '2.7.8'
-	//compile group: 'io.github.classgraph', name: 'classgraph', version: '4.4.12'
+	implementation group: 'io.github.classgraph', name: 'classgraph', version: '4.4.12'
 	implementation group: 'ma.glasnost.orika', name: 'orika-core', version: '1.5.2'
 }

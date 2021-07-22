@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Account;
-import it.crm.enumerator.RoleTypes;
-import it.crm.enumerator.StatusType;
 import it.crm.model.AccountModel;
 import it.crm.repository.AccountRepository;
 import it.esinware.mapping.BeanMapper;
