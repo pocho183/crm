@@ -3,7 +3,6 @@ package it.crm.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
@@ -16,8 +15,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.zaxxer.hikari.HikariDataSource;
 
-import it.crm.utils.SpringUtils;
-import it.esinware.mapping.BeanMapper;
+import it.crm.mapping.bean.BeanMapper;
 
 @Configuration
 @PropertySource(value = {"classpath:/application.properties","classpath:persistence.properties"})

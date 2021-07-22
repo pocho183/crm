@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Company;
-import it.crm.enumerator.StatusType;
+import it.crm.mapping.bean.BeanMapper;
 import it.crm.model.CompanyModel;
 import it.crm.repository.CompanyRepository;
-import it.esinware.mapping.BeanMapper;
 
 @Service
 public class CompanyService {
