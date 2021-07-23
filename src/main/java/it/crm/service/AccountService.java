@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Account;
-import it.crm.mapping.bean.BeanMapper;
 import it.crm.model.AccountModel;
 import it.crm.repository.AccountRepository;
+import it.esinware.mapping.BeanMapper;
 
 
 @Service
@@ -22,10 +22,6 @@ public class AccountService {
 	private AccountRepository accountRepository;
 	
 	public AccountModel saveAccount(AccountModel model) {
-//		if(model.getRole() == null)
-//			model.setRole(RoleTypes.READER);
-//		if(model.getStatus() == null)
-//			model.setStatus(StatusType.ACTIVE);
 		Account account = mapper.map(model, Account.class);
 		return mapper.map(accountRepository.save(account), AccountModel.class);
 	}

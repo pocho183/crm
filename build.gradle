@@ -43,6 +43,7 @@ eclipse {
 dependencies {
 	runtimeOnly fileTree('libs') { include '*.jar' }
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'	
+	implementation name: 'mapping-0.2.1'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.1'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.5.1'
     //implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.1'

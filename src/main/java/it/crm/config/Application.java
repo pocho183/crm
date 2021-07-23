@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.zaxxer.hikari.HikariDataSource;
 
-import it.crm.mapping.bean.BeanMapper;
+import it.esinware.mapping.BeanMapper;
 
 @Configuration
 @PropertySource(value = {"classpath:/application.properties","classpath:persistence.properties"})
