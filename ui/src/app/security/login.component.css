@@ -1,0 +1,142 @@
+.modal {
+	display: block;
+}
+
+.login.modal {
+	background-color: #ddd;
+	padding-top: 80px;
+}
+
+.modal-title {
+	margin: 0px;
+}
+
+.login.modal .modal-dialog {
+	width: 360px;
+}
+
+.login.modal .modal-dialog .modal-content {
+	border-radius: 0px;
+	-webkitbox-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+	position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.modal-header {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-dialog {
+	margin: auto;
+	background-color: white;
+}
+
+.login.modal .modal-dialog .modal-content .modal-header {
+	color: #555;
+	text-align: center;
+	padding: 16px 25px 16px 25px;
+}
+
+.login.modal .modal-dialog .modal-content .modal-header .close {
+	margin-top: -22px;
+	display: none;
+}
+
+.login.modal .modal-dialog .modal-content .modal-header .modal-title {
+	font-weight: normal;
+	font-size: 22px;
+	color: #777;
+}
+
+.login.modal .modal-dialog .modal-content .modal-body {
+	padding: 30px 35px 30px 35px;
+}
+
+.modal-body .input-group {
+	display: table;
+}
+
+.input-group {
+	width: 100%;
+}
+
+.input-group-addon {
+	border: 1px solid #E3E3E3;
+	border-right: 0px;
+	border-radius: 4px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+ 	padding:5px 12px;
+	font-size:14px;
+	font-weight:400;
+	line-height:1;
+	color:#555;
+	text-align:center;
+	white-space:nowrap;
+	vertical-align:middle;
+	width: 21%;
+	position: relative;
+	top: -8px;
+}
+
+.input-group-addon .material-icons {
+	position: relative;
+	top: 7px;
+}
+
+.form-control {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border: 1px solid #E3E3E3;
+	display: table-cell;
+	line-height: 27px;
+	width: 100%;
+}
+
+button {
+	margin-top: 10px;
+	width: 100%;
+}
+
+.btn-login {
+	color:white;
+	background-color:#007AD9;
+	border:none;
+	cursor:pointer;
+}
+
+.form-group button {
+	margin-left: 0px !important;
+}
+
+label {
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.form-group {
+	margin: 5px 0px;
+}
+
+.help-block {
+	color: #A94442;
+}
+
+div.nota {
+	font-size: 13px;
+  margin-top: 10px;
+  text-align: justify;
+}
+
+::ng-deep div.nota * {
+	font-size: 13px !important;
+}

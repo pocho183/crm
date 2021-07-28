@@ -1,0 +1,57 @@
+package it.crm.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import it.crm.security.TokenHelper;
+import it.crm.security.model.User;
+import it.crm.service.SecurityService;
+
+@Controller
+public class SecurityController {
+
+	@Autowired
+	private SecurityService service;
+	@Autowired
+	private TokenHelper tokenHelper;
+	
+	@PostMapping(path = "/login")
+	public ResponseEntity<LoginResponse> login(@RequestParam String username, @RequestParam String password) {
+		User user = service.login(username, password);
+		if(user != null) {
+			String token = tokenHelper.createToken(user);
+			return ResponseEntity.ok().body(new LoginResponse(token));
+		}
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
+	
+	@GetMapping(path = "/logout")
+	public ResponseEntity<Boolean> logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			session.invalidate();
+		}
+		SecurityContextHolder.getContext().setAuthentication(null);
+		SecurityContextHolder.clearContext();
+		return ResponseEntity.ok().body(Boolean.TRUE);
+	}
+
+	private static class LoginResponse {
+		
+	    public String token;
+	
+	    public LoginResponse(final String token) {
+	        this.token = token;
+	    }
+	}
+}
+
