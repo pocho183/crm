@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import it.crm.security.TokenHelper;
 import it.crm.security.model.User;
 import it.crm.service.SecurityService;
@@ -44,10 +46,24 @@ public class SecurityController {
 		SecurityContextHolder.clearContext();
 		return ResponseEntity.ok().body(Boolean.TRUE);
 	}
+	
+	@PostMapping(path = "/authenticate")
+	public ResponseEntity<LoginResponse> authenticate(@RequestParam String token) {
+		try {
+			User user = service.authenticate(token);
+			if(user != null) {
+				String jwtToken = tokenHelper.createToken(user);
+				return ResponseEntity.ok().body(new LoginResponse(jwtToken));
+			}
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
 
 	private static class LoginResponse {
-		
-	    public String token;
+
+		public String token;
 	
 	    public LoginResponse(final String token) {
 	        this.token = token;

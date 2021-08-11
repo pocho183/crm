@@ -19,7 +19,6 @@ import it.esinware.mapping.BeanMapper;
 
 @Configuration
 @PropertySource(value = {"classpath:/application.properties","classpath:persistence.properties"})
-//@ComponentScan(basePackageClasses = SpringUtils.class)
 public class Application {
 
 	@Bean

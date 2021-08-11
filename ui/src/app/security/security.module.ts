@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard';
 import { JwtHelper } from './jwt-helper';
 import { SecurityService } from './security.service';
-import { ACLService } from './acl.service';
-import { HasRoleDirective } from './has-role.directive';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LoginComponent } from './login.component';
 import { SecurityRoutingModule } from './security-routing.module';
@@ -23,18 +21,14 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule
   ],
   declarations: [
-    LoginComponent,
-	HasRoleDirective
+    LoginComponent
   ],
   providers: [
     AuthGuard,
     JwtHelper,
-    SecurityService,
-	ACLService
+    SecurityService
   ],
-  exports: [
-    HasRoleDirective
-  ],
+  exports: [ ],
   entryComponents: [
     LoginComponent
   ]

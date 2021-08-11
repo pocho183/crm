@@ -52,7 +52,7 @@ export class AccountsComponent implements OnInit {
         if (account.password != null && account.email != null && account.password != "" && account.email != "") {
 			this.accountService.saveAccount(account).subscribe(response => {
 				this.loadAccounts();
-			}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'L\'utente è NON è stato salvata', closable: false, life: 2000}); });
+			}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'L\'utente Ã¨ NON Ã¨ stato salvato', closable: false, life: 2000}); });
         }  
         else {
             this.messageService.add({severity:'error', summary: 'Errore', detail:'Account non valido', closable: false, life: 2000});

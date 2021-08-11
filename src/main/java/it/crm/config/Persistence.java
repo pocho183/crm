@@ -45,6 +45,8 @@ public class Persistence extends JpaBaseConfiguration {
 		prop.put(PersistenceUnitProperties.WEAVING, "static");
 		prop.put("javax.persistence.schema-generation.database.action", env.getProperty("spring.datasource.dataTable"));
 		prop.put(PersistenceUnitProperties.WEAVING_INTERNAL, Boolean.FALSE.toString());
+		if(env.getProperty("spring.datasource.dataTable").equals("drop-and-create") || env.getProperty("spring.datasource.dataTable").equals("create"))
+			prop.put("javax.persistence.sql-load-script-source", "file:src/main/resources/initdb.sql");
 		return prop;
 	}
 }

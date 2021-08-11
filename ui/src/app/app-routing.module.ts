@@ -1,14 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './security';
-import { AppComponent } from './app.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { AdministrationComponent } from './components/admin/administration/administration.component';
+import { AdminDocumentationComponent } from './components/admin/documentation/documentation.component';
+import { TaskComponent } from './components/manager/task/task.component';
+import { ManagerDocumentationComponent } from './components/manager/documentation/documentation.component';
 
-const routes: Routes = [ { path: '', component: AppComponent,  canActivate: [AuthGuard] } ];
+const routes: Routes = [
+	/* Settings */
+	{ path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+	
+	/* ADMIN  */
+	{ path: 'admin', component: DashboardComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/administration', component: AdministrationComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/documentation', component: AdminDocumentationComponent, canActivate: [AuthGuard] },
+	
+	/* MANAGER  */
+	{ path: 'manager', component: DashboardComponent, canActivate: [AuthGuard] },
+	{ path: 'manager/task', component: TaskComponent, canActivate: [AuthGuard] },
+	{ path: 'manager/documentation', component: ManagerDocumentationComponent, canActivate: [AuthGuard] },
+	
+	/* Page not found */
+	{ path: '**', component: PageNotFoundComponent }
+	
+];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
+  imports: [ RouterModule.forRoot(routes)],
   exports: [ RouterModule ],
 })
 export class AppRoutingModule {}

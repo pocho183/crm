@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login.component';
 
 const securityRoutes: Routes = [
-  {path: 'logout', component: LoginComponent},
-  {path: 'login', component: LoginComponent}
+  { path: 'logout', component: LoginComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

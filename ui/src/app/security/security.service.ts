@@ -9,13 +9,13 @@ import { plainToClass } from "class-transformer";
 @Injectable()
 export class SecurityService {
 	
-	private currentUserSubject: BehaviorSubject<User>;
+	public currentUserSubject: BehaviorSubject<User>;
 	public token: string;
 	public user: Observable<User>;
   
   constructor(private http: HttpClient, private jwtHelper: JwtHelper) {
 		this.currentUserSubject = new BehaviorSubject<User>(null);
-		this.user = this.currentUserSubject.asObservable();	
+		this.user = this.currentUserSubject.asObservable();
 	}
 
   login(username: string, password: string): Observable<boolean> {
@@ -36,12 +36,12 @@ export class SecurityService {
 		this.createUser(token);
 	}
 
-  logout(): Observable<boolean> {
-    return this.http.get<boolean>('/logout').pipe(first(), tap(() => {
-		sessionStorage.removeItem('currentUser');
-		this.currentUserSubject.next(null);
-	}));
-  }
+    logout(): Observable<boolean> {
+	    return this.http.get<boolean>('/logout').pipe(first(), tap(() => {
+			sessionStorage.removeItem('currentUser');
+			this.currentUserSubject.next(null);
+		}));
+    }
 
 	currentUser(): User {
 		if(this.token && !this.jwtHelper.isTokenExpired(this.token))
@@ -54,17 +54,10 @@ export class SecurityService {
 	private createUser(token: string): boolean {
 		if(token && (!this.token || this.token !== token)) {
 			this.token = token;
-//			if(!this.jwtHelper.isTokenExpired(token, 1800)) {
-				const jwtModel: JWTModel = JSON.parse(this.jwtHelper.decodeToken(token));
-				sessionStorage.setItem('currentUser', token);
-				console.log('ChangeUser');
-				this.currentUserSubject.next(jwtModel.user);
-				return true;
-//			} else {
-//				sessionStorage.removeItem('currentUser');
-//				this.currentUserSubject.next(null);
-//				this.token = null;
-//			}
+			const jwtModel: JWTModel = JSON.parse(this.jwtHelper.decodeToken(token));
+			sessionStorage.setItem('currentUser', token);
+			this.currentUserSubject.next(jwtModel.user);
+			return true;
 		}
 		return false;
 	}

@@ -9,6 +9,7 @@ import { SecurityService } from './security.service';
   styleUrls: ['./login.component.css']
 } )
 export class LoginComponent implements OnInit, OnDestroy {
+	
   env: any = environment;
   username: string;
   password: string;
@@ -17,6 +18,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   destroyed = new Subject<any>();
   
   constructor(private router: Router, private authenticationService: SecurityService) {
+	
+	console.log('Constructor login');
+	
     if(router.url === '/logout') {
       authenticationService.logout().subscribe(response => {
         if(response) {
@@ -26,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() { console.log('Init login'); }
 
   ngOnDestroy(): void {
     this.destroyed.next();

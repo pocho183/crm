@@ -1,35 +1,24 @@
-<div class="login modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" [innerHTML]="env.testoUp"></h5>
-      </div>
-      <div class="modal-body">
-			<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-					<label for="username">Username</label> 						
-					<div class="input-group">
-						<input type="text" class="form-control" name="username" [(ngModel)]="username" #name="ngModel" required />
-					</div>
-					<div *ngIf="f.submitted && !name.valid" class="help-block">Inserisci il tuo nome utente</div>
-				</div>
-				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !pwd.valid }">
-					<label for="password">Password</label> 						
-					<div class="input-group">
-						<input type="password" class="form-control" name="password" [(ngModel)]="password" #pwd="ngModel" required />
-					</div>
-					<div *ngIf="f.submitted && !pwd.valid" class="help-block">Inserisci una password valida</div>
-				</div>
-				<div class="form-group">
-					<button class="btn-login" [disabled]="loading">Login</button>
-				</div>
-				<div *ngIf="error" class="alert alert-danger">{{error}}</div>
-				<div class="spinner" *ngIf="loading">
-					<p-progressSpinner strokeWidth="4" fill="#EEEEEE"></p-progressSpinner>
-				</div>
-				<div class="nota" [innerHTML]="env.testoDown"></div>
-			</form>
-		</div>
-    </div>
+<form autocomplete='off' class='form' name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+  <div class='control'>
+    <h1>Sign In</h1>
   </div>
-</div>
+  <div class='control block-cube block-input'>
+    <input [(ngModel)]="username" name='username' placeholder='Username' type='text'  #name="ngModel" required>
+    <div class='bg-top'><div class='bg-inner'></div></div>
+    <div class='bg-right'><div class='bg-inner'></div></div>
+    <div class='bg'><div class='bg-inner'></div></div>
+  </div>
+  <div class='control block-cube block-input'>
+    <input [(ngModel)]="password" name='password' placeholder='Password' type='password' #pwd="ngModel" required>
+    <div class='bg-top'><div class='bg-inner'></div></div>
+    <div class='bg-right'><div class='bg-inner'></div></div>
+    <div class='bg'><div class='bg-inner'></div></div>
+  </div>
+  <button class='btn block-cube block-cube-hover' type='submit'>
+    <div class='bg-top'><div class='bg-inner'></div></div>
+    <div class='bg-right'><div class='bg-inner'></div></div>
+    <div class='bg'><div class='bg-inner'></div></div>
+    <div class='text'>Login</div>
+  </button>
+  <div *ngIf="error" class="alert alert-danger"><h1>{{error}}</h1></div>
+</form>

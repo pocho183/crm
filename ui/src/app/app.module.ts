@@ -5,29 +5,31 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BackEndInterceptor } from './extension/back-end-interceptor';
 
+import { AccountService } from './services/account.service';
+import { CompanyService } from './services/company.service';
+import { BusyService } from "./services/busy.service";
+import { DialogService } from 'primeng/dynamicdialog';
+
+/*import { SidebarModule } from 'primeng/sidebar';
+import { ToolbarModule } from 'primeng/toolbar';*/
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TableModule } from 'primeng/table';
+
 import { AdminModule } from './components/admin/admin.module';
 import { ManagerModule } from './components/manager/manager.module';
 import { SecurityModule } from './security';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AccountService } from 'src/app/services/account.service';
-import { CompanyService } from 'src/app/services/company.service';
-import { BusyService } from "src/app/services/busy.service";
-import { DialogService } from 'primeng/dynamicdialog';
-
-import { SidebarModule } from 'primeng/sidebar';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ButtonModule } from 'primeng/button';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { TableModule } from 'primeng/table';
-
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component'
-import { DialogErrorComponent } from 'src/app/components/dialog/dialog-error.component';
+import { DialogErrorComponent } from './components/dialog/dialog-error.component';
 
 @NgModule({
   declarations: [
 	AppComponent,
+	DashboardComponent,
 	PageNotFoundComponent,
 	DialogErrorComponent
   ],
@@ -36,8 +38,8 @@ import { DialogErrorComponent } from 'src/app/components/dialog/dialog-error.com
 	HttpClientModule,
 	AdminModule,
 	ManagerModule,
-	SidebarModule,
-	ToolbarModule,
+	/*SidebarModule,
+	ToolbarModule,*/
 	ButtonModule,
 	SecurityModule,
 	FormsModule,
@@ -46,6 +48,7 @@ import { DialogErrorComponent } from 'src/app/components/dialog/dialog-error.com
 	TableModule,
 	AppRoutingModule
   ],
+  exports: [  ],
   providers: [
 	BusyService,
 	DialogService,

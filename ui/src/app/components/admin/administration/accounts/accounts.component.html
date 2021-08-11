@@ -70,7 +70,7 @@
                         <ng-template pTemplate="input">
                         	<p-dropdown [options]="statuses" [(ngModel)]="account.status" [style]="{'width':'100%'}" [showClear]="true" placeholder="Seleziona"></p-dropdown>
                         </ng-template>
-                        <ng-template pTemplate="output">{{account.status}}</ng-template>
+                        <ng-template pTemplate="output">{ account.status, select, ACTIVE {Attivo} SUSPENDED {Sospeso} }</ng-template>
                     </p-cellEditor>
                 </td>
 	            <td>

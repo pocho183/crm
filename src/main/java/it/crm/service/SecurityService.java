@@ -12,8 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import it.crm.domain.Account;
 import it.crm.enumerator.RoleTypes;
 import it.crm.repository.AccountRepository;
@@ -42,11 +46,24 @@ public class SecurityService implements UserDetailsService {
 			remoteUser.setId(credentials.getId());
 			remoteUser.setName(credentials.getName());
 			remoteUser.setSurname(credentials.getSurname());
+			remoteUser.setEmail(credentials.getEmail());
+			remoteUser.setRole(credentials.getRole());
 			return createUser(remoteUser);
 		} catch(Exception e) {
 			logger.error("Login not authorized !");
 		}
 		return null;
+	}
+	
+	public User authenticate(String token) throws JsonMappingException, JsonProcessingException {
+		Claims claims = decodeJWT(token);
+		SSOUser remoteUser = jsonObjectMapper.readValue(claims.get("user").toString(), SSOUser.class);
+		return createUser(remoteUser);
+	}
+	
+	private static Claims decodeJWT(String jwt) {
+	    Claims claims = Jwts.parser().parseClaimsJws(jwt).getBody();
+	    return claims;
 	}
 
 	private User createUser(SSOUser remoteUser) {

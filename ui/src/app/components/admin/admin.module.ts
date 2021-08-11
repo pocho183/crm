@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { AdminRoutingModule } from './admin.routing.module';
 
-import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +18,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AdminComponent } from './admin.component';
 import { AdministrationComponent } from './administration/administration.component';
-import { DocumentationComponent } from './documentation/documentation.component';
+import { AdminDocumentationComponent } from './documentation/documentation.component';
 import { AccountsComponent } from './administration/accounts/accounts.component';
 import { CompanyComponent } from './administration/company/company.component';
 
@@ -27,7 +26,7 @@ import { CompanyComponent } from './administration/company/company.component';
   declarations: [
 	AdminComponent,
 	AdministrationComponent,
-	DocumentationComponent,
+	AdminDocumentationComponent,
 	AccountsComponent,
 	CompanyComponent
   ],
@@ -36,9 +35,8 @@ import { CompanyComponent } from './administration/company/company.component';
 	BrowserModule,
 	BrowserAnimationsModule,
 	RouterModule,
-	ToolbarModule,
 	TableModule,
-	AdminRoutingModule,
+	ToolbarModule,
 	ButtonModule,
 	TabMenuModule,
 	FormsModule,
@@ -53,7 +51,6 @@ import { CompanyComponent } from './administration/company/company.component';
   ],
   exports: [
 	AdminComponent
-  ],
-  bootstrap: [AdminComponent]
+  ]
 })
 export class AdminModule {}

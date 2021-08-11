@@ -1,4 +1,5 @@
-<div class="wrapper">
-	<admin></admin>
-	<manager *ngIf="false"></manager>	
+<div>
+	<admin *ngIf="isAdmin"></admin>
+	<manager *ngIf="isManager"></manager>
+	<article><router-outlet></router-outlet></article>
 </div>
