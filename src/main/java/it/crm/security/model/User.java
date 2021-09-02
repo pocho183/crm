@@ -2,6 +2,7 @@ package it.crm.security.model;
 
 import java.io.Serializable;
 
+import it.crm.domain.Company;
 import it.crm.enumerator.RoleTypes;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +18,6 @@ public class User implements Serializable {
 	private String name;
 	private String surname;
 	private String email;
+	private String company;
 	private RoleTypes roles;
 }

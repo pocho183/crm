@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import it.crm.domain.Account;
 import it.crm.model.AccountModel;
 import it.crm.repository.AccountRepository;
+import it.crm.security.model.User;
 import it.esinware.mapping.BeanMapper;
 
 
@@ -21,16 +22,40 @@ public class AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 	
-	public AccountModel saveAccount(AccountModel model) {
-		Account account = mapper.map(model, Account.class);
-		return mapper.map(accountRepository.save(account), AccountModel.class);
-	}
-	
-	public List<AccountModel> loadAccounts() {
+	public List<AccountModel> adminLoadAccounts() {
 		List<Account> accounts = accountRepository.findAll();
 		// Order by createdAt by DESC
 		accounts.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
 		return mapper.map(accounts, Account.class, AccountModel.class);
+	}
+	
+	public List<AccountModel> managerLoadAccounts(User user) {
+		List<Account> accounts = accountRepository.findByCompany(user.getCompany());
+		// Order by createdAt by DESC
+		accounts.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
+		return mapper.map(accounts, Account.class, AccountModel.class);
+	}
+	
+	public AccountModel saveAccount(AccountModel model) throws Exception {
+		Account account = accountRepository.findByEmail(model.getEmail());
+		if(account != null)
+			account = mapper.map(model, Account.class);
+			if(account.getId() == null)
+				throw new Exception("Duplicated Account ! ");
+		else {
+			account = new Account();
+			account = mapper.map(model, Account.class);
+		}
+		return mapper.map(accountRepository.save(account), AccountModel.class);
+	}
+	
+	public Account getAccount(User user) {
+		Account account = accountRepository.findByEmail(user.getEmail());
+		return account;
+	}
+	
+	public void saveLastConnection(Account account) {
+		accountRepository.save(account);
 	}
 	
 	public void deleteAccount(AccountModel model) {

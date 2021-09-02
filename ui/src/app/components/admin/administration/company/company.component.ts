@@ -69,7 +69,7 @@ export class CompanyComponent implements OnInit {
 	}
 
 	loadCompanies() {
-		this.companyService.loadCompanies().subscribe(response => {
+		this.companyService.adminLoadCompanies().subscribe(response => {
 			this.companies = this.reduceText(response);
 		});
 	}

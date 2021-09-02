@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
-import javax.servlet.annotation.ServletSecurity.EmptyRoleSemantic;
 
 import it.crm.enumerator.RoleTypes;
 import it.crm.enumerator.StatusType;

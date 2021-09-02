@@ -10,8 +10,6 @@ import { CompanyService } from './services/company.service';
 import { BusyService } from "./services/busy.service";
 import { DialogService } from 'primeng/dynamicdialog';
 
-/*import { SidebarModule } from 'primeng/sidebar';
-import { ToolbarModule } from 'primeng/toolbar';*/
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
@@ -38,8 +36,6 @@ import { DialogErrorComponent } from './components/dialog/dialog-error.component
 	HttpClientModule,
 	AdminModule,
 	ManagerModule,
-	/*SidebarModule,
-	ToolbarModule,*/
 	ButtonModule,
 	SecurityModule,
 	FormsModule,

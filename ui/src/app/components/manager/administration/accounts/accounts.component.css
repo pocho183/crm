@@ -1,0 +1,26 @@
+.in-account {
+	background-color: #121212;
+	color: hsla(0,0%,100%,.6);
+	outline-color: #93cbf9;
+}
+
+:host ::ng-deep .p-password-input {
+	width:100% !important;
+	background-color: #121212;
+	color: hsla(0,0%,100%,.6);
+	outline-color: #93cbf9;
+}
+
+:host .data-field, :host ::ng-deep .data-field p, :host ::ng-deep .data-field p span {
+	text-align: center;
+	font-size: 15pt;
+}
+
+:host .content-field {
+	font-size: 10pt;
+}
+
+ :host ::ng-deep .p-cell-editing {
+	 padding-top: 0 !important;
+	 padding-bottom: 0 !important;
+ }

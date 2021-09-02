@@ -9,11 +9,12 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { BusyService } from '../services/busy.service';
 import { CrmError } from 'src/app/models/crm-error.model';
 import { DialogErrorComponent } from 'src/app/components/dialog/dialog-error.component';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class BackEndInterceptor implements HttpInterceptor {
 
-	constructor(@Inject(WINDOW) private window: Window, private security: SecurityService, private dialogService: DialogService, private busy: BusyService) {}
+	constructor(@Inject(WINDOW) private window: Window, private security: SecurityService, private router: Router, private dialogService: DialogService, private busy: BusyService) {}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		if(req.url && !req.url.startsWith('http') && !req.url.startsWith('/assets')) {
@@ -38,21 +39,32 @@ export class BackEndInterceptor implements HttpInterceptor {
 			},
 			err => {
 				this.busy.setBusy(false);
-				// Fix Firefox 52 problem when refreshing page with ctrl+F5
 				if(err.status === 401) {
-					this.security.logout().subscribe();
+					console.log("Back-end interceptor ERROR 401 !");
+					this.security.logout().subscribe(response => { this.router.navigateByUrl('/login'); });
 				} else {
-					this.handleError(err);
+					this.handleError(err, next);
 				}
 			}
 		), finalize(() => this.busy.setBusy(false)));
 	}
 
-	private handleError(response: HttpErrorResponse): void {
+	private handleError(response: HttpErrorResponse, next): void {
+		
+		console.log(response);
+		console.log(next);
+		if(next instanceof HttpResponse) {
+			console.log(next.headers.get('Message'));
+		}
+		
 		let errorData: CrmError[] = new Array();
-		if(response.status === 0){
+		if(response.status === 0) {
 			let reachError = new CrmError();
 			reachError.setNoResponse();
+			errorData.push(reachError);
+		} else if(response.status === 500) { 
+			let reachError = new CrmError();
+			reachError.code = response.status;
 			errorData.push(reachError);
 		} else {
 			errorData = response.error;

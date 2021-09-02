@@ -14,7 +14,6 @@
 	            <th style="width:6.0em">Password</th>
 	            <th style="width:5.0em">Telefono</th>
 	            <th style="width:5.0em">Stato</th>
-	            <th style="width:5.0em">Società</th>
 	            <th style="width:5.0em">Ruolo</th>
 	            <th style="width:5.0em">Opzioni</th>
 	        </tr>
@@ -52,7 +51,6 @@
                     <p-cellEditor class="content-field">
                         <ng-template pTemplate="input">
                         	<p-password [(ngModel)]="account.password" [toggleMask]="true" [style]="{'height':'2vw'}" class="in-account"></p-password>
-                             <!-- <input pInputText type="text" [(ngModel)]="account.password" [style]="{'width':'100%', 'height':'2vw'}" class="in-account"> -->
                         </ng-template>
                         <ng-template pTemplate="output" *ngIf="account.password">**************</ng-template>
                     </p-cellEditor>
@@ -71,14 +69,6 @@
                         	<p-dropdown [options]="statuses" [(ngModel)]="account.status" [style]="{'width':'100%'}" [showClear]="true" placeholder="Seleziona"></p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">{ account.status, select, ACTIVE {Attivo} SUSPENDED {Sospeso} }</ng-template>
-                    </p-cellEditor>
-                </td>
-	            <td>
-                    <p-cellEditor class="content-field" *ngIf="account.role != 'ADMIN'">
-                        <ng-template pTemplate="input">
-                            <p-dropdown [options]="companies" [(ngModel)]="account.company" [style]="{'width':'100%'}" optionLabel="name" [showClear]="true" placeholder="Seleziona"></p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output" *ngIf="account.company">{{account.company.name}}</ng-template>
                     </p-cellEditor>
                 </td>
 	            <td>

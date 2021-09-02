@@ -13,9 +13,8 @@
 		    <div class="p-toolbar-group-right">
 		        <p-button icon="pi pi-user" class="btn-top"></p-button>
 		        <p-button icon="pi pi-calendar" styleClass="p-button-success" class="btn-top"></p-button>
-		        <p-button icon="pi pi-times" styleClass="p-button-danger" class="btn-top"></p-button>
+		        <p-button (click)="logout()" icon="pi pi-times" styleClass="p-button-danger" class="btn-top" pTooltip="Logout" tooltipPosition="bottom"></p-button>
 		    </div>
 		</p-toolbar>
 	</header>
-	<!-- <article><router-outlet></router-outlet></article> -->
 </div>

@@ -13,11 +13,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PasswordModule } from 'primeng/password';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AdminComponent } from './admin.component';
-import { AdministrationComponent } from './administration/administration.component';
+import { AdminAdministrationComponent } from './administration/administration.component';
 import { AdminDocumentationComponent } from './documentation/documentation.component';
 import { AccountsComponent } from './administration/accounts/accounts.component';
 import { CompanyComponent } from './administration/company/company.component';
@@ -25,7 +26,7 @@ import { CompanyComponent } from './administration/company/company.component';
 @NgModule({
   declarations: [
 	AdminComponent,
-	AdministrationComponent,
+	AdminAdministrationComponent,
 	AdminDocumentationComponent,
 	AccountsComponent,
 	CompanyComponent
@@ -37,6 +38,7 @@ import { CompanyComponent } from './administration/company/company.component';
 	RouterModule,
 	TableModule,
 	ToolbarModule,
+	TooltipModule,
 	ButtonModule,
 	TabMenuModule,
 	FormsModule,

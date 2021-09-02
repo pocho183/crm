@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Account } from 'src/app/models/account';
 import { Company } from 'src/app/models/company';
 import { SelectItem } from 'primeng/api';
 import { AccountService } from 'src/app/services/account.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { ConfirmationService, MessageService, LazyLoadEvent } from 'primeng/api';
-import { RoleTypes } from 'src/app/models/enumTypes';
+import { User } from '../../../../security';
+import { SecurityService } from '../../../../security/security.service';
 
 @Component({
 	selector: 'accounts',
@@ -14,28 +15,29 @@ import { RoleTypes } from 'src/app/models/enumTypes';
 })
 export class AccountsComponent implements OnInit {
 	
+	@Input() user: User;
 	editing: boolean = false;
 	account: Account;
 	accounts: Account[] = [];
 	roles: SelectItem[];
 	statuses: SelectItem[];
-	companies: Company[] = [];
+	company: Company;
 	
 	constructor(
+		private securityService: SecurityService,
 		private accountService: AccountService,
 		private companyService: CompanyService, 
 		private messageService: MessageService,
-		private confirmationService: ConfirmationService) {}
+		private confirmationService: ConfirmationService) {	
+			this.securityService.user.subscribe( response => { this.user = response; });
+		}
 
     ngOnInit() {
-		this.roles  = [{label: 'Admin', value: 'ADMIN'},{label: 'Manager', value: 'MANAGER'},{label: 'User', value: 'USER'},{label: 'Reader', value: 'READER'}];
+		this.roles  = [{label: 'Manager', value: 'MANAGER'},{label: 'User', value: 'USER'},{label: 'Reader', value: 'READER'}];
 		this.statuses  = [{label: 'Attivo', value: 'ACTIVE'},{label: 'Sospeso', value: 'SUSPENDED'}];
 		// Load accounts
 		this.loadAccounts();
-		// Call to back-end companies
-		this.companyService.adminLoadCompanies().subscribe(response => {
-			this.companies = response;
-		});
+		this.loadCompany();
 	}
 	
 	createAccount() {
@@ -43,6 +45,8 @@ export class AccountsComponent implements OnInit {
 		this.accounts.forEach(a => { if(a.id == null) { countNewAccount++; } });
 		if(countNewAccount == 0) {
 			this.account = new Account();
+			if(this.company)
+				this.account.company = this.company;
 			let tmp = [...this.accounts];
 			tmp.unshift(this.account);
 			this.accounts = tmp;
@@ -51,8 +55,6 @@ export class AccountsComponent implements OnInit {
 
 	onRowEditSave(account: Account) {
         if (account.password != null && account.email != null && account.password != "" && account.email != "") {
-			if(account.role == RoleTypes.ADMIN)
-				account.company = null;
 			this.accountService.saveAccount(account).subscribe(response => {
 				this.loadAccounts();
 			}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'L\'utente è NON è stato salvato', closable: false, life: 2000}); });
@@ -81,9 +83,17 @@ export class AccountsComponent implements OnInit {
 	}
 
 	loadAccounts() {
-		this.accountService.adminLoadAccounts().subscribe(response => {
+		this.accountService.managerLoadAccounts(this.user).subscribe(response => {
 			this.accounts = this.reduceText(response);
 		});
+	}
+	
+	loadCompany() {
+		if(this.user.company) {
+			this.companyService.managerLoadCompany(this.user.company).subscribe(response => {
+				this.company = response;
+			});
+		}
 	}
 	
 	reduceText(accounts) {

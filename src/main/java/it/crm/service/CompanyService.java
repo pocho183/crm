@@ -20,18 +20,30 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	public CompanyModel saveCompany(CompanyModel model) {
-//		if(model.getStatus() == null)
-//			model.setStatus(StatusType.ACTIVE);
-		Company company = mapper.map(model, Company.class);
-		return mapper.map(companyRepository.save(company), CompanyModel.class);
-	}
-	
 	public List<CompanyModel> loadCompanies() {
 		List<Company> companies = companyRepository.findAll();
 		// Order by createdAt by DESC
 		companies.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
 		return mapper.map(companies, Company.class, CompanyModel.class);
+	}
+	
+	public CompanyModel loadCompany(String companyName) {
+		Optional<Company> company = companyRepository.findByName(companyName);
+		if(company.isPresent())
+			return mapper.map(company.get(), CompanyModel.class);
+		else
+			return null;
+	}
+	
+	public CompanyModel saveCompany(CompanyModel model) {
+		Company company = companyRepository.findByNameAndEmail(model.getName(), model.getEmail());
+		if(company != null)
+			company = mapper.map(model, Company.class);
+		else {
+			company = new Company();
+			company = mapper.map(model, Company.class);
+		}
+		return mapper.map(companyRepository.save(company), CompanyModel.class);
 	}
 	
 	public void deleteCompany(CompanyModel model) {

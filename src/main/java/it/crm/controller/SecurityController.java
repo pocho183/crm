@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import it.crm.domain.Account;
+import it.crm.enumerator.StatusType;
 import it.crm.security.TokenHelper;
 import it.crm.security.model.User;
+import it.crm.service.AccountService;
 import it.crm.service.SecurityService;
 
 @Controller
@@ -25,13 +28,21 @@ public class SecurityController {
 	private SecurityService service;
 	@Autowired
 	private TokenHelper tokenHelper;
+	@Autowired
+	private AccountService accountService;
 	
 	@PostMapping(path = "/login")
 	public ResponseEntity<LoginResponse> login(@RequestParam String username, @RequestParam String password) {
 		User user = service.login(username, password);
 		if(user != null) {
 			String token = tokenHelper.createToken(user);
-			return ResponseEntity.ok().body(new LoginResponse(token));
+			Account account = accountService.getAccount(user);
+			if(account.getStatus() == StatusType.SUSPENDED)
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			else {
+				accountService.saveLastConnection(account);
+				return ResponseEntity.ok().body(new LoginResponse(token));
+			}
 		}
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}

@@ -19,8 +19,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   
   constructor(private router: Router, private authenticationService: SecurityService) {
 	
-	console.log('Constructor login');
-	
     if(router.url === '/logout') {
       authenticationService.logout().subscribe(response => {
         if(response) {
@@ -30,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() { console.log('Init login'); }
+  ngOnInit() { }
 
   ngOnDestroy(): void {
     this.destroyed.next();

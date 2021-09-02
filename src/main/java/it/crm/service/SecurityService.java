@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import it.crm.domain.Account;
+import it.crm.domain.Company;
 import it.crm.enumerator.RoleTypes;
 import it.crm.repository.AccountRepository;
 import it.crm.security.model.User;
@@ -48,6 +49,8 @@ public class SecurityService implements UserDetailsService {
 			remoteUser.setSurname(credentials.getSurname());
 			remoteUser.setEmail(credentials.getEmail());
 			remoteUser.setRole(credentials.getRole());
+			if(credentials.getCompany() != null && credentials.getCompany().getName() != null)
+				remoteUser.setCompany(credentials.getCompany().getName());
 			return createUser(remoteUser);
 		} catch(Exception e) {
 			logger.error("Login not authorized !");
@@ -73,6 +76,7 @@ public class SecurityService implements UserDetailsService {
 		user.setEmail(remoteUser.email);
 		user.setUsername(remoteUser.username);
 		user.setRoles(remoteUser.role);
+		user.setCompany(remoteUser.company);
 		return user;
 	}
 
@@ -88,6 +92,7 @@ public class SecurityService implements UserDetailsService {
 		public boolean enabled;
 		public ApplicationModel current;
 		public RoleTypes role;
+		public String company;
 	}
 
 	public static class ApplicationModel {
