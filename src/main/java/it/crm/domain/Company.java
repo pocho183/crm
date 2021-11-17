@@ -27,8 +27,6 @@ public class Company extends BaseEntity implements Serializable {
 	private String label;
 	@Enumerated(EnumType.STRING)
 	private StatusType status;
-//	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-//	private List<Account> accounts;
 	
 	@Override
 	protected void softRemove(Date deleted) {

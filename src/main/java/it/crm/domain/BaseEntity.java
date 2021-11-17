@@ -24,7 +24,7 @@ public abstract class BaseEntity extends LogicalRemovableEntity implements Seria
 	private static final long serialVersionUID = 5458933851159037180L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "created_at", updatable = false, nullable = false)
     private Date createdAt;

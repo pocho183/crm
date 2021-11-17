@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.crm.model.AccountModel;
+import it.crm.model.CompanyModel;
 import it.crm.security.model.User;
 import it.crm.service.AccountService;
 
@@ -40,8 +41,7 @@ public class AccountController {
 	public ResponseEntity<AccountModel> accountSave(@RequestBody AccountModel account) {
 		logger.debug("Saving account: " + account.getEmail());
 		try {
-		serviceAccount.saveAccount(account);
-		return ResponseEntity.ok(account);
+			return ResponseEntity.ok(serviceAccount.saveAccount(account));
 		} catch(Exception ex) {
 			logger.error(ex.getMessage() + " " + account.getEmail());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).header("Message", ex.getMessage()).header("Context", "Saving Account").build();
