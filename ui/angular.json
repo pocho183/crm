@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "defaultProject": "crm",
   "newProjectRoot": "projects",
   "cli": {
     "analytics": false
@@ -33,6 +34,15 @@
             ]
           },
           "configurations": {
+			"development": {
+				"optimization": false,
+				"sourceMap": true,
+				"namedChunks": false,
+				"aot": false,
+				"extractLicenses": true,
+				"vendorChunk": true,
+				"buildOptimizer": false
+			},
           	"test": {
               "outputHashing": "all",
               "sourceMap": false,
@@ -73,6 +83,9 @@
             "port": 2000
           },
           "configurations": {
+          	"development": {
+              "browserTarget": "crm:build:development"
+            },
             "test": {
               "browserTarget": "crm:build:test"
             },
@@ -80,31 +93,8 @@
               "browserTarget": "crm:build:production"
             }
           }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "crm:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [],
-            "exclude": []
-          }
         }
       }
-    }
-  },
-  "defaultProject": "crm",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "css"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
     }
   }
 }

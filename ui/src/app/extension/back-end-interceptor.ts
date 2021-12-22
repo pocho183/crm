@@ -52,10 +52,18 @@ export class BackEndInterceptor implements HttpInterceptor {
 	private handleError(response: HttpErrorResponse, next): void {
 		
 		console.log(response);
+		console.log(response.error);
 		console.log(next);
 		if(next instanceof HttpResponse) {
 			console.log(next.headers.get('Message'));
 		}
+		
+		
+		 if (response.error instanceof ErrorEvent) {
+	      // A client-side or network error occurred. Handle it accordingly.
+ 			console.error('An error occurred:', response.error);
+	      console.error('An error occurred:', response.error.message);
+	    }
 		
 		let errorData: CrmError[] = new Array();
 		if(response.status === 0) {
@@ -70,10 +78,10 @@ export class BackEndInterceptor implements HttpInterceptor {
 			errorData = response.error;
 		}
 		this.dialogService.open(DialogErrorComponent, {
-				data: errorData,
-				header: "Attenzione!",
-				width: '60vw'
-			});
+			data: errorData,
+			header: "Attenzione!",
+			width: '60vw'
+		});
 	}
 
 /** Without Security

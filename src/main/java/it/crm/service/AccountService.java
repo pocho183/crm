@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Account;
-import it.crm.domain.Company;
+import it.crm.exception.ValidateInputException;
 import it.crm.model.AccountModel;
-import it.crm.model.CompanyModel;
 import it.crm.repository.AccountRepository;
 import it.crm.security.model.User;
 import it.esinware.mapping.BeanMapper;
@@ -38,12 +37,12 @@ public class AccountService {
 		return mapper.map(accounts, Account.class, AccountModel.class);
 	}
 	
-	public AccountModel saveAccount(AccountModel model) throws Exception {
+	public AccountModel saveAccount(AccountModel model) {
 		Account account = accountRepository.findByEmail(model.getEmail());
 		if(account != null) {
 			account = mapper.map(model, Account.class);
 			if(account.getId() == null)
-				throw new Exception("Duplicated Account ! ");
+				throw new ValidateInputException("101", "Duplicated Account ! ");
 		} else {
 			account = new Account();
 			account = mapper.map(model, Account.class);
