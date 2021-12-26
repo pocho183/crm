@@ -13,7 +13,7 @@ export class DialogErrorComponent implements OnInit {
 
 	constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) {}
 
-	ngOnInit() {
+	ngOnInit() {		
 		this.errors = this.config.data;
 	}
 }

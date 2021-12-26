@@ -5,7 +5,7 @@ export class CrmError {
 	
 	public setNoResponse() {
 		this.code = 9999;
-		this.context = 'Errore di rete';
-		this.message = 'Impossibile connettersi al servizio.';
+		this.context = 'Networking error';
+		this.message = 'Service not available';
 	}
 }

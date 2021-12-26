@@ -1,5 +1,7 @@
 package it.crm.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,13 +13,16 @@ import it.crm.exception.ValidateInputException;
 @ControllerAdvice
 public class ExceptionController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
+	
 	@ExceptionHandler(ValidateInputException.class)
-	public ResponseEntity<String> handleValidate(ValidateInputException validate) {
-		return new ResponseEntity<String>("Invalid input field, please check data", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<ValidateInputException> handleValidate(ValidateInputException validate) {
+		validate.customStackTrace().forEach(stack -> { logger.error(stack); });
+		return new ResponseEntity<ValidateInputException>(validate, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(EmptyInputException.class)
 	public ResponseEntity<String> handleEmpty(EmptyInputException empty) {
-		return new ResponseEntity<String>("Input field is empty, please check into it", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>(empty.getErrorMessage(), HttpStatus.BAD_REQUEST);
 	}
 }

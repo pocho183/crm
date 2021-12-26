@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Account;
+import it.crm.exception.ExceptionContext;
 import it.crm.exception.ValidateInputException;
 import it.crm.model.AccountModel;
 import it.crm.repository.AccountRepository;
@@ -42,7 +43,7 @@ public class AccountService {
 		if(account != null) {
 			account = mapper.map(model, Account.class);
 			if(account.getId() == null)
-				throw new ValidateInputException("101", "Duplicated Account ! ");
+				throw new ValidateInputException(ExceptionContext.ACCOUNT, "Duplicated Account ! ");
 		} else {
 			account = new Account();
 			account = mapper.map(model, Account.class);

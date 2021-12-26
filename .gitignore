@@ -2,3 +2,5 @@
 /.gradle/
 /.settings/
 **/node_modules/
+/.classpath
+/starter.pid
