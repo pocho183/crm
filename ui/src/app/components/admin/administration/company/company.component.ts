@@ -28,8 +28,8 @@ export class CompanyComponent implements OnInit {
 		this.loadCompanies();
 	}
 	
-	createCompany() {
-		let countNewCompany = 0;
+	 onRowEditInit() {
+       let countNewCompany = 0;
 		this.companies.forEach(a => { if(a.id == null) { countNewCompany++; } });
 		if(countNewCompany == 0) {
 			this.company = new Company();
@@ -37,7 +37,7 @@ export class CompanyComponent implements OnInit {
 			tmp.unshift(this.company);
 			this.companies = tmp;
 		}
-	}
+    }
 
 	onRowEditSave(company: Company) {
         if (company.name != null && company.name != "") {

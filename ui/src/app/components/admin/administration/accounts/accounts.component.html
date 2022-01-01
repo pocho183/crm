@@ -1,11 +1,17 @@
 <div>
 	<p-toolbar styleClass="p-mb-4">
-		<ng-template pTemplate="left"></ng-template>
+		<ng-template pTemplate="left">
+			<div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" [style]="{'width':'100%', 'height':'2.7vw'}" class="in-account" placeholder="Search keyword" />
+                </span>
+            </div>
+		</ng-template>
         <ng-template pTemplate="right">
             <button (click)="createAccount()" pButton pRipple label="Crea nuovo Account" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
         </ng-template>
     </p-toolbar>
-	<p-table [value]="accounts" [paginator]="true" [rows]="5" dataKey="id" editMode="row">
+	<p-table [value]="accounts" #dt [paginator]="true" [rows]="5" dataKey="id" editMode="row" [globalFilterFields]="['name','surname', 'email', 'company.name', 'label', 'role']">
 	    <ng-template pTemplate="header">
 	        <tr class="data-field">
 	            <th style="width:5.0em">Nome</th>
