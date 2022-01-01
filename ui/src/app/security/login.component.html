@@ -1,24 +1,24 @@
-<form autocomplete='off' class='form' name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-  <div class='control'>
-    <h1>Sign In</h1>
-  </div>
-  <div class='control block-cube block-input'>
-    <input [(ngModel)]="username" name='username' placeholder='Username' type='text'  #name="ngModel" required>
-    <div class='bg-top'><div class='bg-inner'></div></div>
-    <div class='bg-right'><div class='bg-inner'></div></div>
-    <div class='bg'><div class='bg-inner'></div></div>
-  </div>
-  <div class='control block-cube block-input'>
-    <input [(ngModel)]="password" name='password' placeholder='Password' type='password' #pwd="ngModel" required>
-    <div class='bg-top'><div class='bg-inner'></div></div>
-    <div class='bg-right'><div class='bg-inner'></div></div>
-    <div class='bg'><div class='bg-inner'></div></div>
-  </div>
-  <button class='btn block-cube block-cube-hover' type='submit'>
-    <div class='bg-top'><div class='bg-inner'></div></div>
-    <div class='bg-right'><div class='bg-inner'></div></div>
-    <div class='bg'><div class='bg-inner'></div></div>
-    <div class='text'>Login</div>
-  </button>
-  <div *ngIf="error" class="alert alert-danger"><h1>{{error}}</h1></div>
-</form>
+<div class="demo form-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+                <div class="form-container">
+                    <div class="form-horizontal">
+                        <h3 class="title">User Login</h3>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                            <input [(ngModel)]="username" class="form-control" type="text" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-lock"></i></span>
+                            <input [(ngModel)]="password" class="form-control" placeholder="Password" style="-webkit-text-security:disc;">
+                        </div>
+                        <span class="forgot-pass"><a href="#">Lost password?</a></span>
+                        <button class="btn signin" (click)="login()">Login</button>
+                    </div>
+                    <div *ngIf="error" class="alert"><h1>{{error}}</h1></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

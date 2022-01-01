@@ -1,8 +1,5 @@
 package it.crm.exception;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +18,10 @@ public class ValidateInputException extends RuntimeException {
 		this.message = message;
 	}
 	
-	public List<String> customStackTrace() {
-	    StackTraceElement[] trace = super.getStackTrace();
-	    List<String> stack = new ArrayList<>();
-	    for (int i = 0; i < trace.length; i++) {
-	    	stack.add(trace[i].toString());
-	    }
-	    return stack;
-	}
+	/* Avoid to log the stacktrace to the client */
+	@Override
+    public synchronized Throwable fillInStackTrace() {
+        return this;
+    }	
 
 }

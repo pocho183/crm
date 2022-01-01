@@ -17,7 +17,6 @@ public class ExceptionController {
 	
 	@ExceptionHandler(ValidateInputException.class)
 	public ResponseEntity<ValidateInputException> handleValidate(ValidateInputException validate) {
-		validate.customStackTrace().forEach(stack -> { logger.error(stack); });
 		return new ResponseEntity<ValidateInputException>(validate, HttpStatus.BAD_REQUEST);
 	}
 	
