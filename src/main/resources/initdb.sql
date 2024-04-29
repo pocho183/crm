@@ -1,0 +1,8 @@
+INSERT INTO "company" (ID, CREATED_AT, DELETED, EMAIL, LABEL, NAME, PHONE, STATUS, UPDATED_AT) VALUES (1, current_timestamp, null, 'apple@apple.com', 'label', 'Apple', '+36987', 'ACTIVE', null)
+INSERT INTO "company" (ID, CREATED_AT, DELETED, EMAIL, LABEL, NAME, PHONE, STATUS, UPDATED_AT) VALUES (2, current_timestamp, null, 'ibm@ibm.com', 'label', 'IBM', '+36434987', 'ACTIVE', null)
+INSERT INTO "company" (ID, CREATED_AT, DELETED, EMAIL, LABEL, NAME, PHONE, STATUS, UPDATED_AT) VALUES (3, current_timestamp, null, 'olivetti@olivetti.com', 'label', 'Olivetti', '+36924487', 'SUSPENDED', null)
+INSERT INTO "account" (ID, CREATED_AT, DELETED, EMAIL, LABEL, LASTCONNECTION, NAME, PASSWORD, PHONE, ROLE, STATUS, SURNAME, UPDATED_AT, COMPANY_ID) VALUES (4, current_timestamp, null, 'admin', null, null, 'admin', 'admin', '0000', 'ADMIN', 'ACTIVE', 'admin', null, null)
+INSERT INTO "account" (ID, CREATED_AT, DELETED, EMAIL, LABEL, LASTCONNECTION, NAME, PASSWORD, PHONE, ROLE, STATUS, SURNAME, UPDATED_AT, COMPANY_ID) VALUES (5, current_timestamp, null, 'manager', null, null, 'manager', 'manager', '0000', 'MANAGER', 'ACTIVE', 'admin', null, 1)
+INSERT INTO "account" (ID, CREATED_AT, DELETED, EMAIL, LABEL, LASTCONNECTION, NAME, PASSWORD, PHONE, ROLE, STATUS, SURNAME, UPDATED_AT, COMPANY_ID) VALUES (6, current_timestamp, null, 'user', null, null, 'user', 'user', '0000', 'USER', 'SUSPENDED', 'admin', null, 1)
+INSERT INTO "account" (ID, CREATED_AT, DELETED, EMAIL, LABEL, LASTCONNECTION, NAME, PASSWORD, PHONE, ROLE, STATUS, SURNAME, UPDATED_AT, COMPANY_ID) VALUES (7, current_timestamp, null, 'reader', null, null, 'reader', 'reader', '0000', 'READER', 'ACTIVE', 'admin', null, 2)
+UPDATE SEQUENCE SET SEQ_COUNT = 7
