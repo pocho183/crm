@@ -1,0 +1,11 @@
+<div class="admin">
+	<p-tabMenu [model]="items" [activeItem]="items?.[0]"></p-tabMenu>
+	<div class="administration" >
+		<div *ngIf="active == '0'">
+			<company></company>
+		</div>
+		<div *ngIf="active == '1'">
+			<accounts></accounts>
+		</div>
+	</div>
+</div>

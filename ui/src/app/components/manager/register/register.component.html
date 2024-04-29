@@ -1,0 +1,42 @@
+<div class="manager">
+	<div class="register">
+		<div class="btn-caption">
+        	<div><h1>Registro del trattamento</h1></div>
+        	<div><button pButton pRipple icon="pi pi-plus" class="p-button-outlined" pTooltip="Aggiungi Trattamento" tooltipPosition="top"></button></div>
+        </div>
+		<p-accordion [activeIndex]="0">
+		    <p-accordionTab *ngFor="let number of numberRegister" header="Trattamento numero {{number}}">
+				<p-stepper>
+				    <p-stepperPanel *ngFor="let topic of topicRegister" header="{{topic}}">
+				        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+				            <div>
+				                <p-table [value]="treatment" [columns]="treatment[0].columns" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+								    <ng-template pTemplate="header" let-columns>
+								        <tr>
+								        	<th *ngFor="let column of columns[index].names">{{ column }}</th>
+								        	<th>Opzioni</th>
+								        </tr>
+								    </ng-template>
+								    <ng-template pTemplate="body" let-rowData>
+								        <tr>
+								        	<td *ngFor="let rowTreatment of rowData.rows[index].names">{{ rowTreatment }}</td>
+								            <td>
+							                	<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text" pTooltip="Modifica" tooltipPosition="top"></button>
+							                	<button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-text" pTooltip="Aggiungi" tooltipPosition="top"></button>
+							                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text" pTooltip="Cancella" tooltipPosition="top"></button>
+							                </td>
+								        </tr>
+								    </ng-template>
+								</p-table>
+				            </div>
+				            <div class="btnStepper">
+				             	<div><p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" /></div>
+				                <div><p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" /></div>
+				            </div>
+				    	</ng-template>
+				    </p-stepperPanel>
+				</p-stepper>
+		    </p-accordionTab>
+		</p-accordion>
+	</div>
+</div>

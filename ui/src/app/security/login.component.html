@@ -1,0 +1,35 @@
+<div class="blue-line"></div>
+<div class="logo-menu">
+	<img class="img-logo" src="assets/puzzle.png">
+	<div>
+		<h1 class="msg-logo">CRM</h1>
+		<h1 class="sub-msg-logo">business monitoring</h1>
+	</div>
+</div>
+<div class="demo form-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+                <div class="form-container">
+                    <div class="form-horizontal">
+                        <h3 class="title">User Login</h3>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                            <input [(ngModel)]="username" class="form-control" type="text" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-lock"></i></span>
+                            <input [(ngModel)]="password" class="form-control" placeholder="Password" style="-webkit-text-security:disc;">
+                        </div>
+                        <span class="forgot-pass">
+                        	<a>Recupera password?</a>
+                        	<a>Registrati</a>
+                        </span>
+                        <button class="btn signin" (click)="login()">Login</button>
+                    </div>
+                    <div *ngIf="error" class="alert"><h1>{{error}}</h1></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="admin">
+	<header>
+		<p-toolbar>
+		    <div class="p-toolbar-group-left">
+		        <p-button routerLink="/admin/administration" label="Amministrazione" icon="pi pi-cog" class="btn-top"></p-button>
+		        <p-button label="Secondary" icon="pi pi-upload" styleClass="p-button-secondary" class="btn-top"></p-button>
+		        <p-button label="Upload" icon="pi pi-upload" styleClass="p-button-success" class="btn-top"></p-button>
+		        <p-button label="Info" icon="pi pi-upload" styleClass="p-button-info" class="btn-top"></p-button>
+		        <p-button label="Warning" icon="pi pi-upload" styleClass="p-button-warning" class="btn-top"></p-button>
+		        <p-button label="Help" icon="pi pi-upload" styleClass="p-button-help" class="btn-top"></p-button>
+		        <p-button routerLink="/admin/documentation" label="Documenti" icon="pi pi-book" styleClass="p-button-danger" class="btn-top"></p-button>
+		    </div>
+		    <div class="p-toolbar-group-right">
+		    	<p-toast position="top-right"></p-toast>
+		    	<p-button routerLink="/" icon="pi pi-home" styleClass="p-button-success" class="btn-top" pTooltip="Home"></p-button>
+		        <p-button (click)="showUser()" icon="pi pi-user" class="btn-top" pTooltip="User" tooltipPosition="bottom"></p-button>
+		        <p-button icon="pi pi-calendar" styleClass="p-button-help" class="btn-top"></p-button>
+		        <p-button routerLink="/logout" icon="pi pi-times" styleClass="p-button-danger" class="btn-top" pTooltip="Logout" tooltipPosition="bottom"></p-button>
+		    </div>
+		</p-toolbar>
+	</header>
+</div>

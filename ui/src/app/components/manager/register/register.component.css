@@ -1,0 +1,11 @@
+.btn-caption {
+	display:flex;
+	justify-content:space-around;
+	align-items:baseline;
+}
+
+.btnStepper {
+	margin-top:1vw;
+	display:flex;
+	justify-content:space-between;
+}
