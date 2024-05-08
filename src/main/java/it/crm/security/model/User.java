@@ -28,9 +28,10 @@ public class User implements UserDetails, Serializable {
 		super();
 	}
 	
-	public User(String username) {
+	public User(String username, RoleTypes roles) {
 		super();
 		this.username = username;
+		this.roles = roles;
 	}
 	
 	@Override

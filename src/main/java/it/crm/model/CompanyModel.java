@@ -2,6 +2,7 @@ package it.crm.model;
 
 import java.util.Date;
 
+import it.crm.enumerator.CompanyType;
 import it.crm.enumerator.StatusType;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,4 +18,5 @@ public class CompanyModel {
 	private String label;
 	private StatusType status = StatusType.ACTIVE;
 	private Date createdAt;
+	private CompanyType companyType;
 }

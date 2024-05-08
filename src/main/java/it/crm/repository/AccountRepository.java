@@ -8,9 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import it.crm.domain.Account;
+import it.crm.enumerator.CompanyType;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
+	
+	public List<Account> findByCompanyCompanyType(@Param("companyType") CompanyType companyType);
 	
 	public Account findByEmailAndPassword(String email, String password);
 	

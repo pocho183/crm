@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Company } from '../../../../models/company';
 import { SelectItem } from 'primeng/api';
+import { AdminService } from '../../../../services/admin.service';
 import { CompanyService } from '../../../../services/company.service';
 import { ConfirmationService, MessageService, LazyLoadEvent } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,15 +19,18 @@ export class CompanyComponent implements OnInit {
 	companies: Company[] = [];
 	roles?: SelectItem[];
 	statuses?: SelectItem[];
+	companyTypes?: SelectItem[];
 	@ViewChild('dt') dt: Table | undefined;
 	
 	constructor(
+		private adminService: AdminService,
 		private companyService: CompanyService, 
 		private messageService: MessageService,
 		private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
 		this.statuses  = [{label: 'Attivo', value: 'ACTIVE'},{label: 'Sospeso', value: 'SUSPENDED'}];
+		this.companyTypes = [{label: 'Referente', value: 'REFERENTE'},{label: 'Cliente', value: 'CLIENTE'}];
 		// Load companies
 		this.loadCompanies();
 	}
@@ -77,7 +81,7 @@ export class CompanyComponent implements OnInit {
 	}
 
 	loadCompanies() {
-		this.companyService.adminLoadCompanies().subscribe((response: Company[]) => {
+		this.adminService.adminLoadCompanies().subscribe((response: Company[]) => {
 		    this.companies = this.reduceText(response);
 		});
 	}

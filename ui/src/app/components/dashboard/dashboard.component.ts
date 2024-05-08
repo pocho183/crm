@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminComponent } from '../../components/admin/admin.component';
-import { ManagerComponent } from '../../components/manager/manager.component';
+import { ModeratoreComponent } from '../../components/moderatore/moderatore.component';
 import { SecurityService } from '../../security/security.service';
 import { User } from '../../security';
 import { RoleTypes } from '../../models/enumTypes';
@@ -22,7 +22,7 @@ export class DashboardComponent {
         return this.user && this.user.roles === RoleTypes.ADMIN;
     }
 
-	get isManager() {
-        return this.user && this.user.roles === RoleTypes.MANAGER;
+	get isModeratore() {
+        return this.user && this.user.roles === RoleTypes.MODERATORE;
     }
 }

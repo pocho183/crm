@@ -13,13 +13,13 @@ export class AccountService {
   constructor(private http: HttpClient) {}
   
   adminLoadAccounts(): Observable<Account[]> {
-	const url = "/account/admin/load";
+	const url = "/admin/account/load";
     return this.http.get<Account[]>(url).pipe(first(), map(res => {return plainToClass(Account, res)}));
   }
-
-  managerLoadAccounts(user: User): Observable<Account[]> {
-	const url = "/account/manager/load";
-    return this.http.post<Account[]>(url, user).pipe(first(), map(res => {return plainToClass(Account, res)}));
+  
+  moderatoreLoadAccounts(): Observable<Account[]> {
+	const url = "/moderatore/account/load";
+    return this.http.get<Account[]>(url).pipe(first(), map(res => {return plainToClass(Account, res)}));
   }
 
   saveAccount(account: Account) {

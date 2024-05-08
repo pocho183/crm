@@ -5,11 +5,11 @@ import { User } from '../../security';
 import { MessageService } from 'primeng/api';
 
 @Component({
-	selector: 'manager',
-	templateUrl: './manager.component.html',
-	styleUrls: ['./manager.component.css']
+	selector: 'moderatore',
+	templateUrl: './moderatore.component.html',
+	styleUrls: ['./moderatore.component.css']
 })
-export class ManagerComponent implements OnInit {
+export class ModeratoreComponent implements OnInit {
 	
 	user?: User;
 	

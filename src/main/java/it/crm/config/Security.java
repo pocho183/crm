@@ -44,19 +44,14 @@ public class Security {
 	}
 	
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {	
 		http.csrf(csrf -> csrf.disable());
-		http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-    		.requestMatchers(HttpMethod.GET, "/logout", "/**", "/favicon.ico").permitAll()
-    		.requestMatchers(HttpMethod.POST,"/login", "/logout", "/company/**", "/account/**").permitAll()
-    		.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll());
-//				.requestMatchers("/**").permitAll());
-            //.requestMatchers("/api/**").authenticated());
+		http.authorizeHttpRequests(authorize -> authorize
+			.requestMatchers("/**").permitAll()
+			.anyRequest().authenticated());	
 		http.authenticationProvider(authenticationProvider());
 		http.addFilterBefore(jwtAuthenticationTokenFilter(http), UsernamePasswordAuthenticationFilter.class);
 		http.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));    	   	
-	    //http.formLogin(formLogin -> formLogin .loginPage("/login") .permitAll());
-	    //http.logout(logout -> logout .logoutUrl("/logout") .logoutSuccessUrl("/logout"));
 		http.logout(logout -> logout .logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)));	
 		return http.build();
 	}

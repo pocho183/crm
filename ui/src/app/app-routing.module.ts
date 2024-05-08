@@ -5,10 +5,23 @@ import { AdminAdministrationComponent } from './components/admin/administration/
 import { AdminDocumentationComponent } from './components/admin/documentation/documentation.component';
 
 import { AuthGuard } from './security';
+import { AdminGuard } from './security';
+import { ModeratoreGuard } from './security';
+import { ReferenteAziendaGuard } from './security';
+import { ReferenteClienteGuard } from './security';
+import { ReaderAziendaGuard } from './security';
+import { ReaderClienteGuard } from './security';
 
-import { ManagerRegisterComponent } from './components/manager/register/register.component';
-import { ResponsibilityComponent } from './components/manager/responsibility/responsibility.component';
-import { TaskComponent } from './components/manager/task/task.component';
+import { ModeratoreAdministrationComponent } from './components/moderatore/administration/administration.component';
+import { ModeratoreRegisterComponent } from './components/moderatore/register/register.component';
+import { ResponsibilityComponent } from './components/moderatore/responsibility/responsibility.component';
+import { TaskComponent } from './components/moderatore/task/task.component';
+
+import { ReferenteAziendaComponent } from './components/referenteazienda/referenteazienda.component';
+import { ReferenteClienteComponent } from './components/referentecliente/referentecliente.component';
+import { ReaderAziendaComponent } from './components/readerazienda/readerazienda.component';
+import { ReaderClienteComponent } from './components/readercliente/readercliente.component';
+
 import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
@@ -17,15 +30,28 @@ const routes: Routes = [
 	{ path: '', component: DashboardComponent, canActivate: [AuthGuard] },
 	
 	/* ADMIN  */
-	{ path: 'admin', component: DashboardComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/administration', component: AdminAdministrationComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/documentation', component: AdminDocumentationComponent, canActivate: [AuthGuard] },
+	{ path: 'admin', component: DashboardComponent, canActivate: [AdminGuard] },
+	{ path: 'admin/administration', component: AdminAdministrationComponent, canActivate: [AdminGuard] },
+	{ path: 'admin/documentation', component: AdminDocumentationComponent, canActivate: [AdminGuard] },
 
-	/* MANAGER  */
-	{ path: 'manager', component: DashboardComponent, canActivate: [AuthGuard] },
-	{ path: 'manager/register', component: ManagerRegisterComponent, canActivate: [AuthGuard] },
-	{ path: 'manager/responsibility', component: ResponsibilityComponent, canActivate: [AuthGuard] },
-	{ path: 'manager/task', component: TaskComponent, canActivate: [AuthGuard] },
+	/* MODERATORE  */
+	{ path: 'moderatore', component: DashboardComponent, canActivate: [ModeratoreGuard] },
+	{ path: 'moderatore/administration', component: ModeratoreAdministrationComponent, canActivate: [ModeratoreGuard] },
+	{ path: 'moderatore/register', component: ModeratoreRegisterComponent, canActivate: [ModeratoreGuard] },
+	{ path: 'moderatore/responsibility', component: ResponsibilityComponent, canActivate: [ModeratoreGuard] },
+	{ path: 'moderatore/task', component: TaskComponent, canActivate: [ModeratoreGuard] },	
+	
+	/* REFERENTE AZIENDA  */
+	{ path: 'referenteazienda', component: ReferenteAziendaComponent, canActivate: [ReferenteAziendaGuard] },
+	
+	/* REFERENTE CLIENTE  */
+	{ path: 'referentecliente', component: ReferenteClienteComponent, canActivate: [ReferenteClienteGuard] },
+	
+	/* READER AZIENDA  */
+	{ path: 'readerazienda', component: ReaderAziendaComponent, canActivate: [ReaderAziendaGuard] },
+	
+	/* READER CLIENTE  */
+	{ path: 'readercliente', component: ReaderClienteComponent, canActivate: [ReaderClienteGuard] },
 	
 	/* Page not found */
 	// { path: '**', component: PageNotFoundComponent }

@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, first } from 'rxjs/operators';
+import { plainToClass } from "class-transformer";
+import { Account } from '../models/account';
+import { Company } from '../models/company';
+
+@Injectable()
+export class AdminService {
+
+  	constructor(private http: HttpClient) {}
+  
+  	adminLoadAccounts(): Observable<Account[]> {
+		const url = "/admin/account/load";
+    	return this.http.get<Account[]>(url).pipe(first(), map(res => {return plainToClass(Account, res)}));
+  	}
+  
+	adminLoadCompanies(): Observable<Company[]> {
+		const url = "/admin/company/load";
+    	return this.http.get<Company[]>(url).pipe(first(), map(res => {return plainToClass(Company, res)}));
+  	}
+
+}

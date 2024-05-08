@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Account } from '../../../../models/account';
 import { Company } from '../../../../models/company';
 import { SelectItem } from 'primeng/api';
+import { AdminService } from '../../../../services/admin.service';
 import { AccountService } from '../../../../services/account.service';
-import { CompanyService } from '../../../../services/company.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RoleTypes } from '../../../../models/enumTypes';
 import { Table } from 'primeng/table'
@@ -24,18 +24,25 @@ export class AccountsComponent implements OnInit {
 	@ViewChild('dt') dt: Table | undefined;
 	
 	constructor(
+		private adminService: AdminService,
 		private accountService: AccountService,
-		private companyService: CompanyService, 
 		private messageService: MessageService,
 		private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
-		this.roles  = [{label: 'Admin', value: 'ADMIN'},{label: 'Manager', value: 'MANAGER'},{label: 'User', value: 'USER'},{label: 'Reader', value: 'READER'}];
+		this.roles  = [
+			{label: 'Tecnico Software', value: 'ADMIN'},
+			{label: 'Moderatore', value: 'MODERATORE'},
+			{label: 'Referente Azienda', value: 'REFERENTEAZIENDA'},
+			{label: 'Referente Cliente', value: 'REFERENTECLIENTE'},
+			{label: 'Reader Azienda', value: 'READERAZIENDA'},
+			{label: 'Reader Cliente', value: 'READERCLIENTE'}
+		];
 		this.statuses  = [{label: 'Attivo', value: 'ACTIVE'},{label: 'Sospeso', value: 'SUSPENDED'}];
 		// Load accounts
 		this.loadAccounts();
 		// Call to back-end companies
-		this.companyService.adminLoadCompanies().subscribe(response => {
+		this.adminService.adminLoadCompanies().subscribe(response => {
 			this.companies = response;
 		});
 	}
@@ -87,7 +94,7 @@ export class AccountsComponent implements OnInit {
 	}
 
 	loadAccounts() {
-		this.accountService.adminLoadAccounts().subscribe(response => {
+		this.adminService.adminLoadAccounts().subscribe(response => {
 			this.accounts = this.reduceText(response);
 		});
 	}

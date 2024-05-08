@@ -1,0 +1,79 @@
+<div>
+	<p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <button (click)="onRowEditInit()" pButton pRipple label="Crea nuova Società" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+        </ng-template>
+    </p-toolbar>
+	<p-table [value]="companies" [paginator]="true" [rows]="5" dataKey="id" editMode="row"  [globalFilterFields]="['name','email','label', 'status']">
+	    <ng-template pTemplate="header">
+	        <tr class="data-field">
+	            <th style="width:8.0em">Nome</th>
+	            <th style="width:9.0em">Email</th>
+	            <th style="width:5.0em">Telefono</th>
+	            <th style="width:5.0em">Label</th>
+	            <th style="width:5.0em">Stato</th>
+	            <th style="width:5.0em">Data creazione</th>
+	            <th style="width:5.0em">Opzioni</th>
+	        </tr>
+	    </ng-template>
+	    <ng-template pTemplate="emptymessage">
+			<tr><td class="data-field" [attr.colspan]="7">Non ci sono dati</td></tr>
+		</ng-template>
+	    <ng-template pTemplate="body" let-company let-editing="editing" let-ri="rowIndex">
+	        <tr [pEditableRow]="company" >
+	            <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="company.name" [style]="{'width':'100%', 'height':'2vw'}" class="in-company">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{company.name}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="company.email" [style]="{'width':'100%', 'height':'2vw'}" class="in-company p-inputtext-lg">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{company.email}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="company.phone" [style]="{'width':'100%', 'height':'2vw'}" class="in-company">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{company.phone}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="company.label" [style]="{'width':'100%', 'height':'2vw'}" class="in-company">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{company.label}}</ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="input">
+                        	<p-dropdown [options]="statuses" [(ngModel)]="company.status" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">{ company.status, select, ACTIVE {Attivo} SUSPENDED {Sospeso} }</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="output">{{company.createdAt | date:'dd/MM/yyyy'}}</ng-template>
+                    </p-cellEditor>
+                </td>
+	            <td style="text-align:left">
+	            	<p-toast position="top-right"></p-toast>
+					<p-confirmPopup></p-confirmPopup>
+                    <button *ngIf="!editing" pButton pRipple pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                    <button (click)="onRowEditSave(company)" *ngIf="editing" pButton pRipple pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button (click)="onRowEditCancel(company, ri, $event)" *ngIf="editing" pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+	        </tr>
+	    </ng-template>
+	</p-table>
+</div>

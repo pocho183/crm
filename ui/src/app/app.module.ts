@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WINDOW_PROVIDERS } from './extension/window.provider';
 import { BackEndInterceptor } from './extension/back-end-interceptor';
 
+import { AdminService } from './services/admin.service';
+import { ModeratoreService } from './services/moderatore.service';
 import { AccountService } from './services/account.service';
 import { CompanyService } from './services/company.service';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -17,13 +19,17 @@ import { TableModule } from 'primeng/table';
 import { TreeTableModule } from 'primeng/treetable';
 
 import { AdminModule } from './components/admin/admin.module';
-import { ManagerModule } from './components/manager/manager.module';
+import { ModeratoreModule } from './components/moderatore/moderatore.module';
+import { ReferenteAziendaModule } from './components/referenteazienda/referenteazienda.module';
+import { ReferenteClienteModule } from './components/referentecliente/referentecliente.module';
+import { ReaderAziendaModule } from './components/readerazienda/readerazienda.module';
+import { ReaderClienteModule } from './components/readercliente/readercliente.module';
 import { SecurityModule } from './security';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component'
+import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { DialogErrorComponent } from './components/dialog/dialog-error.component';
 
 @NgModule({
@@ -37,7 +43,11 @@ import { DialogErrorComponent } from './components/dialog/dialog-error.component
 	BrowserModule,
 	HttpClientModule,
 	AdminModule,
-	ManagerModule,
+	ModeratoreModule,
+	ReferenteAziendaModule,
+	ReferenteClienteModule,
+	ReaderAziendaModule,
+	ReaderClienteModule,
 	ButtonModule,
 	FormsModule,
 	BrowserAnimationsModule,
@@ -50,6 +60,8 @@ import { DialogErrorComponent } from './components/dialog/dialog-error.component
   ],
   exports: [  ],
   providers: [
+	AdminService,
+	ModeratoreService,
 	BusyService,
 	DialogService,
 	WINDOW_PROVIDERS,

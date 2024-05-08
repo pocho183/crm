@@ -2,7 +2,11 @@ package it.crm.enumerator;
 
 public enum RoleTypes {
 	ADMIN, 
-	MANAGER, 
+	MODERATORE,
+	REFERENTEAZIENDA,
+	REFERENTECLIENTE,
+	READERAZIENDA,
+	READERCLIENTE,
 	USER, 
 	READER
 }

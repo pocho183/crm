@@ -123,7 +123,7 @@ public class SecurityService implements UserDetailsService {
 		if (credential == null) {
 	        throw new UsernameNotFoundException(username);
 	    }
-	    return new User(credential.getEmail());
+	    return new User(credential.getEmail(), credential.getRole());
 	}
 
 }

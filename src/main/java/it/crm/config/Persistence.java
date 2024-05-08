@@ -41,12 +41,13 @@ public class Persistence extends JpaBaseConfiguration {
 	protected Map<String, Object> getVendorProperties() {
 		Map<String, Object> prop = new HashMap<>();
 		/* Clean cache first level with sharedCache and WEAVING_INTERNAL */
-		prop.put("javax.persistence.sharedCache.mode", "NONE");
+		prop.put(PersistenceUnitProperties.SHARED_CACHE_MODE, "NONE");
 		prop.put(PersistenceUnitProperties.WEAVING, "static");
-		prop.put("javax.persistence.schema-generation.database.action", env.getProperty("spring.datasource.dataTable"));
-		prop.put(PersistenceUnitProperties.WEAVING_INTERNAL, Boolean.FALSE.toString());
-		if(env.getProperty("spring.datasource.dataTable").equals("drop-and-create") || env.getProperty("spring.datasource.dataTable").equals("create"))
-			prop.put("javax.persistence.sql-load-script-source", "file:src/main/resources/initdb.sql");
+		prop.put(PersistenceUnitProperties.WEAVING_INTERNAL, "false");
+		prop.put(PersistenceUnitProperties.DDL_GENERATION, env.getProperty("spring.datasource.dataTable"));
+		if(env.getProperty("spring.datasource.dataTable").equals("drop-and-create-tables") || env.getProperty("spring.datasource.dataTable").equals("create")) {
+			prop.put(PersistenceUnitProperties.SCHEMA_GENERATION_SQL_LOAD_SCRIPT_SOURCE, "classpath:src/main/resources/initdb.sql");
+		}
 		return prop;
 	}
 }

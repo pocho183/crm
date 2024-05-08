@@ -1,7 +1,5 @@
 package it.crm.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.crm.model.AccountModel;
 import it.crm.model.CompanyModel;
 import it.crm.service.CompanyService;
 
@@ -27,12 +24,7 @@ public class CompanyController {
 	@Autowired
 	private CompanyService serviceCompany;
 	
-	@GetMapping(path = "admin/load")
-	public ResponseEntity<List<CompanyModel>> loadCompanies() {
-		return new ResponseEntity<List<CompanyModel>>(serviceCompany.loadCompanies(), HttpStatus.OK);
-	}
-	
-	@GetMapping(path = "manager/load/{company}")
+	@GetMapping(path = "moderatore/load/{company}")
 	public ResponseEntity<CompanyModel> loadCompany(@PathVariable String company) {
 		return new ResponseEntity<CompanyModel>(serviceCompany.loadCompany(company), HttpStatus.OK);
 	}

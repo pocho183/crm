@@ -16,17 +16,11 @@ import { TreeTableModule } from 'primeng/treetable';
 import { AccordionModule } from 'primeng/accordion';
 import { StepperModule } from 'primeng/stepper';
 
-import { ManagerComponent } from './manager.component';
-import { ManagerRegisterComponent } from './register/register.component';
-import { ResponsibilityComponent } from './responsibility/responsibility.component';
-import { TaskComponent } from './task/task.component';
+import { ReaderAziendaComponent } from './readerazienda.component';
 
 @NgModule({
   declarations: [
-	ManagerComponent,
-	ManagerRegisterComponent,
-	ResponsibilityComponent,
-	TaskComponent
+	ReaderAziendaComponent
   ],
   imports: [
 	BrowserModule,
@@ -50,7 +44,7 @@ import { TaskComponent } from './task/task.component';
 	
   ],
   exports: [
-	ManagerComponent
+	ReaderAziendaComponent
   ]
 })
-export class ManagerModule {}
+export class ReaderAziendaModule {}

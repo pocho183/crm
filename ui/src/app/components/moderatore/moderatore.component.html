@@ -1,0 +1,18 @@
+<div class="moderatore">
+	<header>
+		<p-toolbar>
+		    <div class="p-toolbar-group-left">
+		    	<p-button routerLink="/moderatore/administration" label="Amministrazione" styleClass="p-button-secondary" icon="pi pi-cog" class="btn-top"></p-button>
+		        <p-button routerLink="/moderatore/responsibility" label="Responsabili Interni" icon="pi pi-download" styleClass="p-button-warning" class="btn-top"></p-button>
+		        <p-button routerLink="/moderatore/responsibility" label="Responsabili Esterni" icon="pi pi-upload" styleClass="p-button-help" class="btn-top"></p-button>
+		        <p-button routerLink="/moderatore/register" label="Registro trattamenti" icon="pi pi-book" styleClass="p-button-danger" class="btn-top"></p-button>
+		    </div>
+		    <div class="p-toolbar-group-right">
+		    	<p-toast position="top-right"></p-toast>
+		    	<p-button routerLink="/" icon="pi pi-home" styleClass="p-button-success" class="btn-top" pTooltip="Home"></p-button>
+		        <p-button (click)="showUser()" icon="pi pi-user" styleClass="p-button-help"  class="btn-top" pTooltip="User" tooltipPosition="bottom"></p-button>
+		        <p-button routerLink="/logout" icon="pi pi-times" styleClass="p-button-danger" class="btn-top" pTooltip="Logout" tooltipPosition="bottom"></p-button>
+		    </div>
+		</p-toolbar>
+	</header>
+</div>

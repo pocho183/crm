@@ -9,13 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Account;
+import it.crm.enumerator.CompanyType;
 import it.crm.exception.ExceptionContext;
 import it.crm.exception.ValidateInputException;
 import it.crm.model.AccountModel;
 import it.crm.repository.AccountRepository;
 import it.crm.security.model.User;
 import it.esinware.mapping.BeanMapper;
-
 
 @Service
 public class AccountService {
@@ -25,6 +25,10 @@ public class AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 	
+	public AccountService(AccountRepository accountRepository) {
+		this.accountRepository = accountRepository;
+	}
+	
 	public List<AccountModel> adminLoadAccounts() {
 		List<Account> accounts = accountRepository.findAll();
 		// Order by surname by ASC
@@ -32,10 +36,10 @@ public class AccountService {
 		return mapper.map(accounts, Account.class, AccountModel.class);
 	}
 	
-	public List<AccountModel> managerLoadAccounts(User user) {
-		List<Account> accounts = accountRepository.findByCompany(user.getCompany());
-		// Order by createdAt by DESC
-		accounts.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
+	public List<AccountModel> moderatoreLoadAccounts() {
+		List<Account> accounts = accountRepository.findByCompanyCompanyType(CompanyType.REFERENTE);
+		// Order by surname by ASC
+		accounts.sort((a1,a2) -> a1.getSurname().compareTo(a2.getSurname()));
 		return mapper.map(accounts, Account.class, AccountModel.class);
 	}
 	

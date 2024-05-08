@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
 //import { CompanyComponent } from './company/company.component';
 
 @Component({
-	selector: 'administration',
+	selector: 'adminadministration',
 	templateUrl: './administration.component.html',
 	styleUrls: ['./administration.component.css']
 })

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Company;
+import it.crm.enumerator.CompanyType;
 import it.crm.exception.ExceptionContext;
 import it.crm.exception.ValidateInputException;
 import it.crm.model.CompanyModel;
@@ -22,8 +23,15 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	public List<CompanyModel> loadCompanies() {
+	public List<CompanyModel> adminLoadCompanies() {
 		List<Company> companies = companyRepository.findAll();
+		// Order by createdAt by DESC
+		companies.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
+		return mapper.map(companies, Company.class, CompanyModel.class);
+	}
+	
+	public List<CompanyModel> moderatoreLoadCompanies() {
+		List<Company> companies = companyRepository.findByCompanyType(CompanyType.REFERENTE);
 		// Order by createdAt by DESC
 		companies.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
 		return mapper.map(companies, Company.class, CompanyModel.class);

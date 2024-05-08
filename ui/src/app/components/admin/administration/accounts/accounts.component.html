@@ -67,7 +67,7 @@
                 <td>
                     <p-cellEditor class="content-field">
                         <ng-template pTemplate="input">
-                        	<p-dropdown [options]="statuses" [(ngModel)]="account.status" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
+                        	<p-dropdown [options]="statuses" [(ngModel)]="account.status" [style]="{'width':'100%', 'height':'2vw', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">{ account.status, select, ACTIVE {Attivo} SUSPENDED {Sospeso} }</ng-template>
                     </p-cellEditor>
@@ -75,7 +75,7 @@
 	            <td>
                     <p-cellEditor class="content-field" *ngIf="account.role != 'ADMIN'">
                         <ng-template pTemplate="input">
-                            <p-dropdown [options]="companies" [(ngModel)]="account.company"  [style]="{'width':'100%', 'z-index': '9999'}" optionLabel="name" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
+                            <p-dropdown [options]="companies" [(ngModel)]="account.company"  [style]="{'width':'100%', 'height':'2vw', 'z-index': '9999'}" optionLabel="name" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output" *ngIf="account.company">{{account.company.name}}</ng-template>
                     </p-cellEditor>
@@ -85,7 +85,7 @@
                         <ng-template pTemplate="input">
                         	<p-dropdown [options]="roles" [(ngModel)]="account.role" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
-                        <ng-template pTemplate="output">{{account.role}}</ng-template>
+                        <ng-template pTemplate="output">{ account.role, select, ADMIN {Tecnico Software} MODERATORE {Moderatore} REFERENTEAZIENDA {Referente Azienda} REFERENTECLIENTE {Referente Cliente} READERAZIENDA {Reader Azienda} READERCLIENTE {Reader Cliente} }</ng-template>
                     </p-cellEditor>
                 </td>
 	            <td style="text-align:left">

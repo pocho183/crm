@@ -12,6 +12,7 @@
 	            <th style="width:5.0em">Telefono</th>
 	            <th style="width:5.0em">Label</th>
 	            <th style="width:5.0em">Stato</th>
+	            <th style="width:5.0em">Tipo</th>
 	            <th style="width:5.0em">Data creazione</th>
 	            <th style="width:5.0em">Opzioni</th>
 	        </tr>
@@ -59,6 +60,14 @@
                         	<p-dropdown [options]="statuses" [(ngModel)]="company.status" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">{ company.status, select, ACTIVE {Attivo} SUSPENDED {Sospeso} }</ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor class="content-field">
+                        <ng-template pTemplate="input">
+                        	<p-dropdown [options]="companyTypes" [(ngModel)]="company.companyType" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">{ company.companyType, select, REFERENTE {Referente} CLIENTE {Cliente} }</ng-template>
                     </p-cellEditor>
                 </td>
 	            <td>

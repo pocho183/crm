@@ -1,6 +1,9 @@
 <div>
 	<admin *ngIf="isAdmin"></admin>
-	<manager *ngIf="isManager"></manager>
-	<!-- <manager></manager> -->
+	<moderatore *ngIf="isModeratore"></moderatore>
+	<referenteazienda *ngIf="isReferenteAzienda"></referenteazienda>
+	<referentecliente *ngIf="isReferenteCliente"></referentecliente>
+	<readerazienda *ngIf="isReaderAzienda"></readerazienda>
+	<readercliente *ngIf="isReaderCliente"></readercliente>
 	<article><router-outlet></router-outlet></article>
 </div>

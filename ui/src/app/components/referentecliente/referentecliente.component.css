@@ -1,0 +1,13 @@
+:host ::ng-deep .p-toolbar {
+    background: #64b5f6;
+    border: 1px solid #64b5f6;
+}
+
+.referentecliente {
+	display: flex;
+	flex-direction: column;
+}
+
+.btn-top {
+	padding-left:5px;
+}

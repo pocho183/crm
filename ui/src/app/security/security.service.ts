@@ -27,9 +27,6 @@ export class SecurityService {
   	}
 
   	authenticate(token: string, applicationCode: string): Observable<boolean> {
-		  
-		  console.log("aaaaa");
-		  
 	    let params = new HttpParams().append("token", token).append("applicationCode", applicationCode);
 	    return this.http.post<string>('/authenticate', params, {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' })})
 				.pipe(first(), map(response => this.createUser(response)));

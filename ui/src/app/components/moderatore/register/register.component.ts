@@ -8,10 +8,10 @@ import { StubTreatment } from "../../../models/stubtreatment";
 	templateUrl: './register.component.html',
 	styleUrls: ['./register.component.css']
 })
-export class ManagerRegisterComponent implements OnInit {
+export class ModeratoreRegisterComponent implements OnInit {
 	
 	numberRegister: string[]=[ "1", "2", "3"];
-	topicRegister: string[]=[ "Trattamento", "Categorie", "Misure organizzative"];
+	topicRegister: string[]=[ "Anagrafica responsabile", "Anagrafica cliente", "Misure organizzative"];
 	
 	//treatment: string[] = ["1"];
 	treatment: StubTreatment[] = [{

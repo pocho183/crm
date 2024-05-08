@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminComponent } from './components/admin/admin.component';
-import { ManagerComponent } from './components/manager/manager.component';
+import { ModeratoreComponent } from './components/moderatore/moderatore.component';
 import { SecurityService } from './security/security.service';
 import { User } from './security';
 import { RoleTypes } from '../app/models/enumTypes';
@@ -23,8 +23,24 @@ export class AppComponent {
         return this.user && this.user.roles === RoleTypes.ADMIN;
     }
 
-	get isManager() {
-        return this.user && this.user.roles === RoleTypes.MANAGER;
+	get isModeratore() {
+        return this.user && this.user.roles === RoleTypes.MODERATORE;
+    }
+    
+    get isReferenteAzienda() {
+        return this.user && this.user.roles === RoleTypes.REFERENTEAZIENDA;
+    }
+    
+    get isReferenteCliente() {
+        return this.user && this.user.roles === RoleTypes.REFERENTECLIENTE;
+    }
+    
+    get isReaderAzienda() {
+        return this.user && this.user.roles === RoleTypes.READERAZIENDA;
+    }
+    
+    get isReaderCliente() {
+        return this.user && this.user.roles === RoleTypes.READERCLIENTE;
     }
 	
 }
