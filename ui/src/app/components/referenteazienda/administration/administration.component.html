@@ -1,0 +1,8 @@
+<div class="referenteazienda">
+	<p-tabMenu [model]="items" [activeItem]="items?.[0]"></p-tabMenu>
+	<div class="administration" >
+		<div *ngIf="active == '0'">
+			<referenteaziendaaccounts></referenteaziendaaccounts>
+		</div>
+	</div>
+</div>

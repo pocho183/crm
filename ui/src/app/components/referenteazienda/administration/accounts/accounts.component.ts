@@ -3,18 +3,21 @@ import { Account } from '../../../../models/account';
 import { Company } from '../../../../models/company';
 import { SelectItem } from 'primeng/api';
 import { AccountService } from '../../../../services/account.service';
-import { ModeratoreService } from '../../../../services/moderatore.service';
+import { SecurityService } from '../../../../security/security.service';
+import { ReferenteAziendaService } from '../../../../services/referenteazienda.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RoleTypes } from '../../../../models/enumTypes';
 import { Table } from 'primeng/table'
+import { User } from '../../../../security';
 
 @Component({
-	selector: 'accounts',
+	selector: 'referenteaziendaaccounts',
 	templateUrl: './accounts.component.html',
 	styleUrls: ['./accounts.component.css']
 })
-export class AccountsComponent implements OnInit {
+export class ReferenteAziendaAccountsComponent implements OnInit {
 	
+	user?: User;
 	editing: boolean = false;
 	account?: Account;
 	accounts: Account[] = [];
@@ -24,27 +27,23 @@ export class AccountsComponent implements OnInit {
 	@ViewChild('dt') dt: Table | undefined;
 	
 	constructor(
+		private authenticationService: SecurityService,
 		private accountService: AccountService,
-		private moderatoreService: ModeratoreService, 
+		private refrenteAziendaService: ReferenteAziendaService, 
 		private messageService: MessageService,
-		private confirmationService: ConfirmationService) {}
+		private confirmationService: ConfirmationService) {
+			this.authenticationService.user.subscribe( response => { this.user = response; });
+			this.refrenteAziendaService.referenteAziendaLoadCompanies().subscribe(response => { this.companies = response });
+		}
 
     ngOnInit() {
 		this.roles  = [
-			{label: 'Tecnico Software', value: 'ADMIN'},
-			{label: 'Moderatore', value: 'MODERATORE'},
-			{label: 'Referente Azienda', value: 'REFERENTEAZIENDA'},
-			//{label: 'Referente Cliente', value: 'REFERENTECLIENTE'},
-			{label: 'Reader Azienda', value: 'READERAZIENDA'},
-			//{label: 'Reader Cliente', value: 'READERCLIENTE'}
+			{label: 'Referente Cliente', value: 'REFERENTECLIENTE'},
+			{label: 'Reader Cliente', value: 'READERCLIENTE'}
 		];
 		this.statuses  = [{label: 'Attivo', value: 'ACTIVE'},{label: 'Sospeso', value: 'SUSPENDED'}];
 		// Load accounts
 		this.loadAccounts();
-		// Call to back-end companies
-		this.moderatoreService.moderatoreLoadCompanies().subscribe(response => {
-			this.companies = response;
-		});
 	}
 	
 	createAccount() {
@@ -60,11 +59,14 @@ export class AccountsComponent implements OnInit {
 
 	onRowEditSave(account: Account) {
         if (account.password != null && account.email != null && account.password != "" && account.email != "") {
-			if(account.role == RoleTypes.MODERATORE)
-        		account.company = undefined;
-			this.accountService.saveAccount(account).subscribe(response => {
-				this.loadAccounts();
-			}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'L\'utente è NON è stato salvato', closable: false, life: 2000}); });
+			this.refrenteAziendaService.referenteAziendaLoadCompanies().subscribe( re => {
+				const com = re.find(res => res['name'] === this.user?.company);
+				account.company = com;
+				this.accountService.saveAccount(account).subscribe(response => {
+					// Reload
+					this.loadAccounts();
+				}, error => { this.messageService.add({severity:'error', summary: 'Errore', detail:'L\'utente è NON è stato salvato', closable: false, life: 2000}); });				
+			});
         }  
         else {
             this.messageService.add({severity:'error', summary: 'Errore', detail:'Account non valido', closable: false, life: 2000});
@@ -90,9 +92,11 @@ export class AccountsComponent implements OnInit {
 	}
 
 	loadAccounts() {
-		this.accountService.moderatoreLoadAccounts().subscribe(response => {
-			this.accounts = this.reduceText(response);
-		});
+		if (this.user && this.user.company) {
+			this.refrenteAziendaService.referenteAziendaLoadAccounts(this.user.company).subscribe(response => {
+				this.accounts = this.reduceText(response);
+			});
+		}
 	}
 	
 	reduceText(accounts: Account[]): Account[] {

@@ -20,6 +20,6 @@ public class AccountModel {
 	private String label;
 	private StatusType status = StatusType.ACTIVE;
 	private CompanyModel company;
-	private RoleTypes role = RoleTypes.READER;
+	private RoleTypes role;
 	private Date lastConnection;
 }

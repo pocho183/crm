@@ -9,11 +9,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import it.crm.domain.Account;
+import it.crm.domain.Company;
 import it.crm.enumerator.CompanyType;
+import it.crm.enumerator.RoleTypes;
 import it.crm.exception.ExceptionContext;
 import it.crm.exception.ValidateInputException;
 import it.crm.model.AccountModel;
+import it.crm.model.CompanyModel;
 import it.crm.repository.AccountRepository;
+import it.crm.repository.CompanyRepository;
 import it.crm.security.model.User;
 import it.esinware.mapping.BeanMapper;
 
@@ -37,10 +41,21 @@ public class AccountService {
 	}
 	
 	public List<AccountModel> moderatoreLoadAccounts() {
-		List<Account> accounts = accountRepository.findByCompanyCompanyType(CompanyType.REFERENTE);
+		List<Account> accounts = accountRepository.findAll();
+		List<AccountModel> list = mapper.map(accounts, Account.class, AccountModel.class);
+		list.removeIf(l -> l.getRole().equals(RoleTypes.ADMIN) || l.getCompany().getCompanyType().equals(CompanyType.CLIENTE));
 		// Order by surname by ASC
-		accounts.sort((a1,a2) -> a1.getSurname().compareTo(a2.getSurname()));
-		return mapper.map(accounts, Account.class, AccountModel.class);
+		list.sort((a1,a2) -> a1.getSurname().compareTo(a2.getSurname()));
+		return list;
+	}
+	
+	public List<AccountModel> referenteAziendaLoadAccounts(String company) {
+		List<Account> accounts = accountRepository.findByCompany(company);
+		List<AccountModel> list = mapper.map(accounts, Account.class, AccountModel.class);
+		list.removeIf(l -> l.getRole().equals(RoleTypes.ADMIN) || l.getRole().equals(RoleTypes.MODERATORE));
+		// Order by surname by ASC
+		list.sort((a1,a2) -> a1.getSurname().compareTo(a2.getSurname()));
+		return list;
 	}
 	
 	public AccountModel saveAccount(AccountModel model) {

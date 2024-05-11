@@ -1,0 +1,40 @@
+<div class="referenteazienda">
+	<div class="responsibility">		
+		<div>
+			<p-treeTable [value]="resp" class="table-responsibility" [tableStyle]="{ 'min-width': '10rem' }" [styleClass]="selectedSize"
+			[paginator]="true" [rows]="10" styleClass="p-datatable-gridlines" [showCurrentPageReport]="true"
+			currentPageReportTemplate="Pagina {first} di {last}">
+			    <ng-template pTemplate="caption">
+			        <div class="btn-caption">
+			        	<div><h1>Identificazione delle responsabilità del responsabile esterno incaricato da Mercedes</h1></div>
+			        	<div><button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success" pTooltip="XLS" tooltipPosition="bottom"></button></div>
+            			<div><button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF" tooltipPosition="bottom"></button></div>
+			        	<div><button pButton pRipple icon="pi pi-plus" class="p-button-outlined" pTooltip="Aggiungi Responsabile" tooltipPosition="top"></button></div>
+			        </div>
+			    </ng-template>
+			    <ng-template pTemplate="header">
+			        <tr>
+			            <th style="width: 50%">Funzione Responsabile</th>
+			            <th style="width: 35%">Nome Responsabile</th>
+			            <th style="width: 15%">Opzioni</th>
+			        </tr>
+			    </ng-template>
+			    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+			        <tr [ttRow]="rowNode">
+			            <td>
+			                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+			                {{ rowData.functionResponsible }}
+			            </td>
+			            <td>{{ rowData.namesResponsible }}</td>
+			            <td>
+		                	<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text" pTooltip="Modifica Responsabile" tooltipPosition="top"></button>
+		                	<button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-text" pTooltip="Aggiungi SUB Responsabile" tooltipPosition="top"></button>
+		                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text" pTooltip="Cancella Responsabile" tooltipPosition="top"></button>
+		                </td>
+			        </tr>
+			    </ng-template>
+			    <ng-template pTemplate="summary"> Ultimo aggiornamento: 24 novembre 2023 </ng-template>
+			</p-treeTable>
+		</div>
+	</div>
+</div>

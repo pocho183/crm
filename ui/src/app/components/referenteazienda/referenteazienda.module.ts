@@ -17,10 +17,18 @@ import { AccordionModule } from 'primeng/accordion';
 import { StepperModule } from 'primeng/stepper';
 
 import { ReferenteAziendaComponent } from './referenteazienda.component';
+import { ReferenteAziendaAdministrationComponent } from './administration/administration.component';
+import { ReferenteAziendaAccountsComponent } from './administration/accounts/accounts.component';
+import { ReferenteAziendaRegisterComponent } from './register/register.component';
+import { ReferenteAziendaResponsibilityComponent } from './responsibility/responsibility.component';
 
 @NgModule({
   declarations: [
-	ReferenteAziendaComponent
+	ReferenteAziendaComponent,
+	ReferenteAziendaAdministrationComponent,
+	ReferenteAziendaAccountsComponent,
+	ReferenteAziendaRegisterComponent,
+	ReferenteAziendaResponsibilityComponent
   ],
   imports: [
 	BrowserModule,

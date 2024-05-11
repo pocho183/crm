@@ -18,6 +18,10 @@ import { ResponsibilityComponent } from './components/moderatore/responsibility/
 import { TaskComponent } from './components/moderatore/task/task.component';
 
 import { ReferenteAziendaComponent } from './components/referenteazienda/referenteazienda.component';
+import { ReferenteAziendaAdministrationComponent } from './components/referenteazienda/administration/administration.component';
+import { ReferenteAziendaRegisterComponent } from './components/referenteazienda/register/register.component';
+import { ReferenteAziendaResponsibilityComponent } from './components/referenteazienda/responsibility/responsibility.component';
+
 import { ReferenteClienteComponent } from './components/referentecliente/referentecliente.component';
 import { ReaderAziendaComponent } from './components/readerazienda/readerazienda.component';
 import { ReaderClienteComponent } from './components/readercliente/readercliente.component';
@@ -43,6 +47,9 @@ const routes: Routes = [
 	
 	/* REFERENTE AZIENDA  */
 	{ path: 'referenteazienda', component: ReferenteAziendaComponent, canActivate: [ReferenteAziendaGuard] },
+	{ path: 'referenteazienda/administration', component: ReferenteAziendaAdministrationComponent, canActivate: [ReferenteAziendaGuard] },
+	{ path: 'referenteazienda/register', component: ReferenteAziendaRegisterComponent, canActivate: [ReferenteAziendaGuard] },
+	{ path: 'referenteazienda/responsibility', component: ReferenteAziendaResponsibilityComponent, canActivate: [ReferenteAziendaGuard] },
 	
 	/* REFERENTE CLIENTE  */
 	{ path: 'referentecliente', component: ReferenteClienteComponent, canActivate: [ReferenteClienteGuard] },

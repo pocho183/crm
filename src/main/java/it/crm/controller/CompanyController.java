@@ -24,10 +24,10 @@ public class CompanyController {
 	@Autowired
 	private CompanyService serviceCompany;
 	
-	@GetMapping(path = "moderatore/load/{company}")
-	public ResponseEntity<CompanyModel> loadCompany(@PathVariable String company) {
-		return new ResponseEntity<CompanyModel>(serviceCompany.loadCompany(company), HttpStatus.OK);
-	}
+//	@GetMapping(path = "moderatore/load/{company}")
+//	public ResponseEntity<CompanyModel> loadCompany(@PathVariable String company) {
+//		return new ResponseEntity<CompanyModel>(serviceCompany.loadCompany(company), HttpStatus.OK);
+//	}
 	
 	@PostMapping(path = "save")
 	public ResponseEntity<CompanyModel> companySave(@RequestBody CompanyModel company) {

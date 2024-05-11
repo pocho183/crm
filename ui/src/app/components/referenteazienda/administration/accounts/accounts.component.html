@@ -13,7 +13,6 @@
 	            <th style="width:6.0em">Password</th>
 	            <th style="width:5.0em">Telefono</th>
 	            <th style="width:5.0em">Stato</th>
-	            <th style="width:5.0em">Società</th>
 	            <th style="width:5.0em">Ruolo</th>
 	            <th style="width:5.0em">Opzioni</th>
 	        </tr>
@@ -75,17 +74,9 @@
 	            <td>
                     <p-cellEditor class="content-field">
                         <ng-template pTemplate="input">
-                            <p-dropdown [options]="companies" [(ngModel)]="account.company"  [style]="{'width':'100%', 'height':'2vw', 'z-index': '9999'}" optionLabel="name" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output" *ngIf="account.company">{{account.company.name}}</ng-template>
-                    </p-cellEditor>
-                </td>
-	            <td>
-                    <p-cellEditor class="content-field">
-                        <ng-template pTemplate="input">
                         	<p-dropdown [options]="roles" [(ngModel)]="account.role" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
-                        <ng-template pTemplate="output">{ account.role, select, ADMIN {Tecnico Software} MODERATORE {Moderatore} REFERENTEAZIENDA {Referente Azienda} READERAZIENDA {Reader Azienda} }</ng-template>
+                        <ng-template pTemplate="output">{ account.role, select, REFERENTEAZIENDA {Referente Azienda} READERAZIENDA {Reader Azienda} REFERENTECLIENTE {Referente Cliente} READERCLIENTE {Reader Cliente} }</ng-template>
                     </p-cellEditor>
                 </td>
 	            <td style="text-align:left">

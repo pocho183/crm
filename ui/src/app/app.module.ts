@@ -8,6 +8,7 @@ import { BackEndInterceptor } from './extension/back-end-interceptor';
 
 import { AdminService } from './services/admin.service';
 import { ModeratoreService } from './services/moderatore.service';
+import { ReferenteAziendaService } from './services/referenteazienda.service';
 import { AccountService } from './services/account.service';
 import { CompanyService } from './services/company.service';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -62,6 +63,7 @@ import { DialogErrorComponent } from './components/dialog/dialog-error.component
   providers: [
 	AdminService,
 	ModeratoreService,
+	ReferenteAziendaService,
 	BusyService,
 	DialogService,
 	WINDOW_PROVIDERS,
