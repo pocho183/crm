@@ -40,10 +40,10 @@ public class AccountService {
 		return mapper.map(accounts, Account.class, AccountModel.class);
 	}
 	
-	public List<AccountModel> moderatoreLoadAccounts() {
-		List<Account> accounts = accountRepository.findAll();
+	public List<AccountModel> moderatoreLoadAccounts(String company) {
+		List<Account> accounts = accountRepository.findByCompany(company);
 		List<AccountModel> list = mapper.map(accounts, Account.class, AccountModel.class);
-		list.removeIf(l -> l.getRole().equals(RoleTypes.ADMIN) || l.getCompany().getCompanyType().equals(CompanyType.CLIENTE));
+		list.removeIf(l -> l.getRole().equals(RoleTypes.ADMIN) ||  l.getRole().equals(RoleTypes.MODERATORE) || l.getCompany().getCompanyType().equals(CompanyType.CLIENTE));
 		// Order by surname by ASC
 		list.sort((a1,a2) -> a1.getSurname().compareTo(a2.getSurname()));
 		return list;

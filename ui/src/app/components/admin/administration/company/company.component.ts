@@ -14,7 +14,6 @@ import { Table } from 'primeng/table'
 })
 export class CompanyComponent implements OnInit {
 	
-	editing: boolean = false;
 	company?: Company;
 	companies: Company[] = [];
 	roles?: SelectItem[];

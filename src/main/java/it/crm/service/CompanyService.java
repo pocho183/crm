@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import it.crm.domain.Company;
 import it.crm.enumerator.CompanyType;
+import it.crm.enumerator.StatusType;
 import it.crm.exception.ExceptionContext;
 import it.crm.exception.ValidateInputException;
 import it.crm.model.CompanyModel;
@@ -31,7 +32,7 @@ public class CompanyService {
 	}
 	
 	public List<CompanyModel> moderatoreLoadCompanies() {
-		List<Company> companies = companyRepository.findByCompanyType(CompanyType.REFERENTE);
+		List<Company> companies = companyRepository.findByCompanyTypeAndStatus(CompanyType.REFERENTE, StatusType.ACTIVE);
 		// Order by createdAt by DESC
 		companies.sort((a1,a2) -> a2.getCreatedAt().compareTo(a1.getCreatedAt()));
 		return mapper.map(companies, Company.class, CompanyModel.class);

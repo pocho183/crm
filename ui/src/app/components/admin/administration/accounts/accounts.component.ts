@@ -15,7 +15,6 @@ import { Table } from 'primeng/table'
 })
 export class AccountsComponent implements OnInit {
 	
-	editing: boolean = false;
 	account?: Account;
 	accounts: Account[] = [];
 	roles?: SelectItem[];

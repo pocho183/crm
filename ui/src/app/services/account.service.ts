@@ -17,8 +17,8 @@ export class AccountService {
     return this.http.get<Account[]>(url).pipe(first(), map(res => {return plainToClass(Account, res)}));
   }
   
-  moderatoreLoadAccounts(): Observable<Account[]> {
-	const url = "/moderatore/account/load";
+  moderatoreLoadAccounts(company: string): Observable<Account[]> {
+	const url = "/moderatore/account/load/" + company;
     return this.http.get<Account[]>(url).pipe(first(), map(res => {return plainToClass(Account, res)}));
   }
 

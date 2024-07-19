@@ -24,7 +24,7 @@ export class ModeratoreComponent implements OnInit {
 	
 	showUser() {
 		if(this.user) {
-			this.messageService.add({severity:'info', summary: 'Info', detail: this.user.name + ' '+ this.user.surname + ', Ruolo: ' + this.user.roles + ', Società: ' + this.user.company, life:2000, closable: false }); 
+			this.messageService.add({severity:'info', summary: 'Info', detail: ' Ruolo: ' + this.user.roles + ', Società: ' + this.user.company, life:2000, closable: false }); 
 		}
 	}
 	

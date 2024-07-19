@@ -16,6 +16,15 @@
 
 .btn-caption {
 	display:flex;
-	justify-content:space-around;
+	justify-content:space-between;
 	align-items:baseline;
+}
+
+input {
+	height:2.5rem;
+	width:70%;
+}
+
+.p-treetable .p-treetable-toggler[style*="visibility: hidden"] {
+    display: none;
 }

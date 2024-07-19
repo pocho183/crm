@@ -22,8 +22,8 @@ export class ModeratoreAdministrationComponent implements OnInit {
 
     ngOnInit() {
         this.items = [
-			{label: 'Gestione Società', tabindex: '0', icon: 'pi pi-fw pi-th-large', command: (event) => { this.changeTab(event); }},
-            {label: 'Gestione Utenti', tabindex: '1', icon: 'pi pi-fw pi-user',  command: (event) => { this.changeTab(event); } }
+			//{label: 'Gestione Società', tabindex: '0', icon: 'pi pi-fw pi-th-large', command: (event) => { this.changeTab(event); }},
+            {label: 'Gestione Utenti', tabindex: '0', icon: 'pi pi-fw pi-user',  command: (event) => { this.changeTab(event); } }
         ];
 		this.activeItem = this.items[0];
     }

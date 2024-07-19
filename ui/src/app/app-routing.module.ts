@@ -15,7 +15,6 @@ import { ReaderClienteGuard } from './security';
 import { ModeratoreAdministrationComponent } from './components/moderatore/administration/administration.component';
 import { ModeratoreRegisterComponent } from './components/moderatore/register/register.component';
 import { ResponsibilityComponent } from './components/moderatore/responsibility/responsibility.component';
-import { TaskComponent } from './components/moderatore/task/task.component';
 
 import { ReferenteAziendaComponent } from './components/referenteazienda/referenteazienda.component';
 import { ReferenteAziendaAdministrationComponent } from './components/referenteazienda/administration/administration.component';
@@ -42,8 +41,7 @@ const routes: Routes = [
 	{ path: 'moderatore', component: DashboardComponent, canActivate: [ModeratoreGuard] },
 	{ path: 'moderatore/administration', component: ModeratoreAdministrationComponent, canActivate: [ModeratoreGuard] },
 	{ path: 'moderatore/register', component: ModeratoreRegisterComponent, canActivate: [ModeratoreGuard] },
-	{ path: 'moderatore/responsibility', component: ResponsibilityComponent, canActivate: [ModeratoreGuard] },
-	{ path: 'moderatore/task', component: TaskComponent, canActivate: [ModeratoreGuard] },	
+	{ path: 'moderatore/responsibility/:type', component: ResponsibilityComponent, canActivate: [ModeratoreGuard] },
 	
 	/* REFERENTE AZIENDA  */
 	{ path: 'referenteazienda', component: ReferenteAziendaComponent, canActivate: [ReferenteAziendaGuard] },

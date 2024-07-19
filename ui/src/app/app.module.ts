@@ -26,6 +26,7 @@ import { ReferenteClienteModule } from './components/referentecliente/referentec
 import { ReaderAziendaModule } from './components/readerazienda/readerazienda.module';
 import { ReaderClienteModule } from './components/readercliente/readercliente.module';
 import { SecurityModule } from './security';
+import { DragDropModule } from 'primeng/dragdrop';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -57,7 +58,8 @@ import { DialogErrorComponent } from './components/dialog/dialog-error.component
 	TableModule,
 	TreeTableModule,
 	AppRoutingModule,
-	SecurityModule
+	SecurityModule,
+	DragDropModule
   ],
   exports: [  ],
   providers: [

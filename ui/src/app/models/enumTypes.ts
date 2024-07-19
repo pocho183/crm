@@ -18,3 +18,8 @@ export enum CompanyTypes {
 	REFERENTE = 'REFERENTE',
 	CLIENTE = 'CLIENTE'
 }
+
+export enum ResponsabilityTypes {
+	INTERNAL = 'INTERNAL',
+	EXTERNAL = 'EXTERNAL'
+}

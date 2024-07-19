@@ -1,39 +1,87 @@
 <div class="moderatore">
 	<div class="responsibility">		
 		<div>
-			<p-treeTable [value]="resp" class="table-responsibility" [tableStyle]="{ 'min-width': '10rem' }" [styleClass]="selectedSize"
-			[paginator]="true" [rows]="10" styleClass="p-datatable-gridlines" [showCurrentPageReport]="true"
-			currentPageReportTemplate="Pagina {first} di {last}">
-			    <ng-template pTemplate="caption">
+			<p-treeTable [value]="rowData"  class="table-responsibility" [tableStyle]="{ 'min-width': '10rem' }" [styleClass]="selectedSize" [paginator]="true" [rows]="10" currentPageReportTemplate="Record totali {totalRecords}">
+				 <ng-template pTemplate="emptymessage">
+		            <tr ><td colspan="7" style="text-align: center;">Non ci sono dati disponibili</td></tr>
+		        </ng-template>
+				<ng-template pTemplate="caption">
 			        <div class="btn-caption">
-			        	<div><h1>Identificazione delle responsabilità del responsabile esterno incaricato da Mercedes</h1></div>
-			        	<div><button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success" pTooltip="XLS" tooltipPosition="bottom"></button></div>
-            			<div><button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF" tooltipPosition="bottom"></button></div>
-			        	<div><button pButton pRipple icon="pi pi-plus" class="p-button-outlined" pTooltip="Aggiungi Responsabile" tooltipPosition="top"></button></div>
+			        	<div><h1>{{title}}</h1></div>
+			        	<div><button (click)="addResponsability()" pButton pRipple icon="pi pi-plus" class="p-button-outlined" pTooltip="Aggiungi Responsabile" tooltipPosition="top"></button></div>
 			        </div>
 			    </ng-template>
-			    <ng-template pTemplate="header">
-			        <tr>
-			            <th style="width: 50%">Funzione Responsabile</th>
-			            <th style="width: 35%">Nome Responsabile</th>
-			            <th style="width: 15%">Opzioni</th>
+		  		<ng-template pTemplate="header">
+		    		<tr>
+		    			<!-- <th style="width: 5%"></th> -->
+		    			<th style="width: 10%">Ordine</th>
+			            <th style="width: 20%">Funzione Responsabile</th>
+			            <th style="width: 20%">Nome Responsabile</th>
+			            <th style="width: 25%">Email</th>
+			            <th style="width: 15%">Numero Telefonico</th>
+			            <th style="width: 10%">Opzioni</th>
 			        </tr>
-			    </ng-template>
-			    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-			        <tr [ttRow]="rowNode">
-			            <td>
-			                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-			                {{ rowData.functionResponsible }}
-			            </td>
-			            <td>{{ rowData.namesResponsible }}</td>
-			            <td>
-		                	<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text" pTooltip="Modifica Responsabile" tooltipPosition="top"></button>
-		                	<button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-text" pTooltip="Aggiungi SUB Responsabile" tooltipPosition="top"></button>
-		                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text" pTooltip="Cancella Responsabile" tooltipPosition="top"></button>
+		  		</ng-template>
+		  		<ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-rowIndex="rowIndex">
+		    		<tr [ttRow]="rowNode">
+		    			<!-- <td ttEditableColumn [ttEditableColumnDisabled]="rowIndex == 0" [ngClass]="{ 'p-toggler-column': rowIndex === 0 }">
+		                    <p-treeTableToggler [rowNode]="rowNode" />
+		                </td> -->
+		    			<td ttEditableColumn [ttEditableColumnDisabled]="rowIndex == 0" [ngClass]="{ 'p-toggler-column': rowIndex === 0 }">
+		                    <p-treeTableToggler [rowNode]="rowNode" />
+		                    <p-treeTableCellEditor>
+		                        <ng-template pTemplate="input">
+		                            <input type="number" pInputText type="text" [(ngModel)]="rowData.position" />
+		                        </ng-template>
+		                        <ng-template pTemplate="output">{{ rowData.position | number }}</ng-template>
+		                    </p-treeTableCellEditor>
 		                </td>
-			        </tr>
-			    </ng-template>
-			    <ng-template pTemplate="summary"> Ultimo aggiornamento: 24 novembre 2023 </ng-template>
+		      			<td ttEditableColumn [ttEditableColumnDisabled]="rowIndex == 0" [ngClass]="{ 'p-toggler-column': rowIndex === 0 }">	                    
+		                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="rowIndex === 0"/>
+		                    <p-treeTableCellEditor>
+		                        <ng-template pTemplate="input">
+		                            <input pInputText type="text" [(ngModel)]="rowData.functionName" />
+		                        </ng-template>
+		                        <ng-template pTemplate="output">{{ rowData.functionName }}</ng-template>
+		                    </p-treeTableCellEditor>
+		                </td>
+		                <td ttEditableColumn [ttEditableColumnDisabled]="rowIndex == 0" [ngClass]="{ 'p-toggler-column': rowIndex === 0 }">
+		                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="rowIndex === 0"/>
+		                    <p-treeTableCellEditor>
+		                        <ng-template pTemplate="input">
+		                            <input pInputText type="text" [(ngModel)]="rowData.name" />
+		                        </ng-template>
+		                        <ng-template pTemplate="output">{{ rowData.name }}</ng-template>
+		                    </p-treeTableCellEditor>
+		                </td>
+		                <td ttEditableColumn [ttEditableColumnDisabled]="rowIndex == 0" [ngClass]="{ 'p-toggler-column': rowIndex === 0 }">
+		                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="rowIndex === 0"/>
+		                    <p-treeTableCellEditor>
+		                        <ng-template pTemplate="input">
+		                            <input pInputText type="text" [(ngModel)]="rowData.email" />
+		                        </ng-template>
+		                        <ng-template pTemplate="output">{{ rowData.email }}</ng-template>
+		                    </p-treeTableCellEditor>
+		                </td>
+		                <td ttEditableColumn [ttEditableColumnDisabled]="rowIndex == 0" [ngClass]="{ 'p-toggler-column': rowIndex === 0 }">
+		                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="rowIndex === 0"/>
+		                    <p-treeTableCellEditor>
+		                        <ng-template pTemplate="input">
+		                            <input pInputText type="text" [(ngModel)]="rowData.phoneNumber" />
+		                        </ng-template>
+		                        <ng-template pTemplate="output">{{ rowData.phoneNumber }}</ng-template>
+		                    </p-treeTableCellEditor>
+		                </td>
+		      			<td>
+			            	<p-toast position="top-right"></p-toast>
+							<p-confirmPopup></p-confirmPopup>
+		                	<button (click)="onRowEditSave()" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-text" pTooltip="Salva Responsabile" tooltipPosition="top"></button>
+		                	<button (click)="addSubResponsability(rowNode)"pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-text" pTooltip="Aggiungi sotto Responsabile" tooltipPosition="top"></button>
+		                    <button (click)="onRowEditCancel(rowData, $event)" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text" pTooltip="Cancella Responsabile" tooltipPosition="top"></button>
+		                </td>
+		    		</tr>
+		  		</ng-template>
+			    <ng-template pTemplate="summary"> Ultimo aggiornamento: {{ lastUpdate | date:'dd-MM-yyyy' }}</ng-template>
 			</p-treeTable>
 		</div>
 	</div>

@@ -22,48 +22,48 @@
 		</ng-template>
 	    <ng-template pTemplate="body" let-company let-editing="editing" let-ri="rowIndex">
 	        <tr [pEditableRow]="company" >
-	            <td>
-                    <p-cellEditor class="content-field">
+	            <td [pEditableColumn]="company.name" pEditableColumnField="name">
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="company.name" [style]="{'width':'100%', 'height':'2vw'}" class="in-company">
                         </ng-template>
                         <ng-template pTemplate="output">{{company.name}}</ng-template>
                     </p-cellEditor>
                 </td>
-	            <td>
-                    <p-cellEditor class="content-field">
+	            <td [pEditableColumn]="company.email" pEditableColumnField="email">
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="company.email" [style]="{'width':'100%', 'height':'2vw'}" class="in-company p-inputtext-lg">
                         </ng-template>
                         <ng-template pTemplate="output">{{company.email}}</ng-template>
                     </p-cellEditor>
                 </td>
-	            <td>
-                    <p-cellEditor class="content-field">
+	            <td [pEditableColumn]="company.phone" pEditableColumnField="phone">
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="company.phone" [style]="{'width':'100%', 'height':'2vw'}" class="in-company">
                         </ng-template>
                         <ng-template pTemplate="output">{{company.phone}}</ng-template>
                     </p-cellEditor>
                 </td>
-	            <td>
-                    <p-cellEditor class="content-field">
+	            <td [pEditableColumn]="company.label" pEditableColumnField="label">
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="company.label" [style]="{'width':'100%', 'height':'2vw'}" class="in-company">
                         </ng-template>
                         <ng-template pTemplate="output">{{company.label}}</ng-template>
                     </p-cellEditor>
                 </td>
-                <td>
-                    <p-cellEditor class="content-field">
+                <td [pEditableColumn]="company.status" pEditableColumnField="status">
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                         	<p-dropdown [options]="statuses" [(ngModel)]="company.status" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">{ company.status, select, ACTIVE {Attivo} SUSPENDED {Sospeso} }</ng-template>
                     </p-cellEditor>
                 </td>
-                <td>
-                    <p-cellEditor class="content-field">
+                <td [pEditableColumn]="company.companyType" pEditableColumnField="companyType">
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                         	<p-dropdown [options]="companyTypes" [(ngModel)]="company.companyType" [style]="{'width':'100%', 'z-index': '9999'}" [showClear]="true" placeholder="Seleziona" appendTo="body"></p-dropdown>
                         </ng-template>
@@ -71,16 +71,15 @@
                     </p-cellEditor>
                 </td>
 	            <td>
-                    <p-cellEditor class="content-field">
+                    <p-cellEditor>
                         <ng-template pTemplate="output">{{company.createdAt | date:'dd/MM/yyyy'}}</ng-template>
                     </p-cellEditor>
                 </td>
 	            <td style="text-align:left">
 	            	<p-toast position="top-right"></p-toast>
 					<p-confirmPopup></p-confirmPopup>
-                    <button *ngIf="!editing" pButton pRipple pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-                    <button (click)="onRowEditSave(company)" *ngIf="editing" pButton pRipple pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                    <button (click)="onRowEditCancel(company, ri, $event)" *ngIf="editing" pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                    <button (click)="onRowEditSave(company)" pButton pRipple pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button (click)="onRowEditCancel(company, ri, $event)" pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
                 </td>
 	        </tr>
 	    </ng-template>

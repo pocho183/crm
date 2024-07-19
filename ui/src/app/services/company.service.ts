@@ -8,16 +8,21 @@ import { Company } from '../models/company';
 @Injectable()
 export class CompanyService {
 
-  constructor(private http: HttpClient) {}
+  	constructor(private http: HttpClient) {}
 
-  saveCompany(company: Company) {
-	const url = "/company/save";
-    return this.http.post<Company>(url, company).pipe(first(), map(res => {return plainToClass(Company, res)}));
-  }
+	loadCompanyByName(company: string): Observable<Company> {
+		const url = "/company/load/" + company;
+    	return this.http.get<Company>(url).pipe(first(), map(res => {return plainToClass(Company, res)}));
+  	}
+  	
+  	saveCompany(company: Company) {
+		const url = "/company/save";
+   		return this.http.post<Company>(url, company).pipe(first(), map(res => {return plainToClass(Company, res)}));
+  	}
 
-  deleteCompany(company: Company) {
-	const url = "/company/delete";
-    return this.http.post<Company>(url, company).pipe(first(), map(res => {return plainToClass(Company, res)}));
+  	deleteCompany(company: Company) {
+		const url = "/company/delete";
+    	return this.http.post<Company>(url, company).pipe(first(), map(res => {return plainToClass(Company, res)}));
   }
 
 }

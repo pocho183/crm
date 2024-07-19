@@ -22,7 +22,6 @@ import { AccountsComponent } from './administration/accounts/accounts.component'
 import { CompanyComponent } from './administration/company/company.component';
 import { ModeratoreRegisterComponent } from './register/register.component';
 import { ResponsibilityComponent } from './responsibility/responsibility.component';
-import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +30,7 @@ import { TaskComponent } from './task/task.component';
 	AccountsComponent,
 	CompanyComponent,
 	ModeratoreRegisterComponent,
-	ResponsibilityComponent,
-	TaskComponent
+	ResponsibilityComponent
   ],
   imports: [
 	BrowserModule,
